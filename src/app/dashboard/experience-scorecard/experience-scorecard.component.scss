@@ -1,0 +1,15 @@
+#scorecard-wrap {
+  min-height: 100vh;
+
+  background-color: #e8e8e8;
+}
+
+.ux-header {
+  width: 50%;
+}
+
+@media (max-width: 1100px) {
+  .ux-header {
+    width: 100%;
+  }
+}

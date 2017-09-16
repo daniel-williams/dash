@@ -1,0 +1,97 @@
+<div [ngSwitch]='schema.presenter'>
+
+  <assigned-presenter
+    *ngSwitchCase='PresenterType.Assigned'
+    [data]='getData'></assigned-presenter>
+
+  <collapsible-text-presenter
+    *ngSwitchCase='PresenterType.CollapsibleText'
+    [data]='getData'></collapsible-text-presenter>
+
+  <color-box-presenter
+    *ngSwitchCase='PresenterType.ColorBox'
+    [data]='getData'
+    [key]='getKey'></color-box-presenter>
+
+  <shortname-presenter
+    *ngSwitchCase='PresenterType.Shortname'
+    [data]='getData'></shortname-presenter>
+
+  <text-presenter
+    *ngSwitchCase='PresenterType.Text'
+    [data]='getData'></text-presenter>
+
+  <workitem-link-presenter
+    *ngSwitchCase='PresenterType.WorkitemLink'
+    [data]='getData'></workitem-link-presenter>
+
+
+
+  <accessibility-presenter
+    *ngSwitchCase='PresenterType.Accessibility'
+    [data]='data'></accessibility-presenter>
+
+  <completeness-presenter
+    *ngSwitchCase='PresenterType.Completeness'
+    [data]='data'></completeness-presenter>
+
+  <craftsmanship-presenter
+    *ngSwitchCase='PresenterType.Craftsmanship'
+    [data]='data'></craftsmanship-presenter>
+
+  <high-impact-bugs-presenter
+    *ngSwitchCase='PresenterType.HighImpactBugs'
+    [data]='data'></high-impact-bugs-presenter>
+
+  <customer-feedback-presenter
+    *ngSwitchCase='PresenterType.CustomerFeedback'
+    [data]='data'></customer-feedback-presenter>
+
+  <measurable-outcome-met-presenter
+    *ngSwitchCase='PresenterType.MeasurableOutcomeMet'
+    [data]='data'></measurable-outcome-met-presenter>
+
+  <overall-grade-presenter
+    *ngSwitchCase='PresenterType.OverallGrade'
+    [data]='data'></overall-grade-presenter>
+
+  <risk-assessment-presenter
+    *ngSwitchCase='PresenterType.RiskAssessment'
+    [data]='data'></risk-assessment-presenter>
+
+  <scenario-validation-presenter
+    *ngSwitchCase='PresenterType.ScenarioValidation'
+    [data]='data'></scenario-validation-presenter>
+
+  <state-presenter
+    *ngSwitchCase='PresenterType.State'
+    [data]='data'></state-presenter>
+
+  <telemetry-presenter
+    *ngSwitchCase='PresenterType.Telemetry'
+    [data]='data'></telemetry-presenter>
+
+
+
+  <planning-compliance-presenter
+    *ngSwitchCase='PresenterType.PlanningCompliance'
+    [data]='data'></planning-compliance-presenter>
+
+  <planning-dev-design-presenter
+    *ngSwitchCase='PresenterType.PlanningDevDesign'
+    [data]='data'></planning-dev-design-presenter>
+
+  <planning-func-spec-presenter
+    *ngSwitchCase='PresenterType.PlanningFuncSpec'
+    [data]='data'></planning-func-spec-presenter>
+
+  <planning-risk-presenter
+    *ngSwitchCase='PresenterType.PlanningRisk'
+    [data]='data'></planning-risk-presenter>
+
+  <planning-state-presenter
+    *ngSwitchCase='PresenterType.PlanningState'
+    [data]='data'></planning-state-presenter>
+
+
+</div>

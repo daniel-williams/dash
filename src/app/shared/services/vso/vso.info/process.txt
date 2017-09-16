@@ -1,0 +1,29 @@
+1) query for scenario ids
+2) query for scenario data
+  Q: why should it required 2 steps to perform this?
+  A: "it's expected behavior..." source: http://stackoverflow.com/questions/38429074/vsts-query-by-wiql-does-not-return-requested-fields/38429385#38429385
+3) create a Related Workitems map keyed on scenario id (empty to begin with)
+  {
+    [key: string]: {
+      id: number, // System.ID
+      workitemType: string, // System.WorkitemType,
+      ...
+      related: {
+        promises: number[],
+        scenarios: number[],
+        deliverables: number[],
+        tasks: number[],
+        measures: number[],
+        bugs: number[]
+        ...
+      }
+    }
+  }
+4) for each scenario, query for all related workitems where workitem type in ('Deliverable', 'Measure', 'Bug')
+  Problem: linear complexity - slow
+
+5) place returned ids into Related WorkItems map
+6) per workitem type, retrieve workitems in batches, 200 per request
+7)
+
+

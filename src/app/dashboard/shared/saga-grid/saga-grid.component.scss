@@ -1,0 +1,86 @@
+$headerColor: #b1b4ba;
+$calcHeaderColor: #5b79c0;
+$shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+
+.pinned table {
+  border-collapse: unset; // required to get drop shadow in Edge
+  box-shadow: $shadow;
+
+  thead > tr.controls td {
+    background-color: rgba(255,255,255,0.9);
+  }
+}
+
+.grid-controls {
+  position: relative;
+  display: block;
+
+  padding: 5px 15px;
+
+  color: #666666;
+  background-color: rgba(255,255,255,0.9);
+
+  .grid-controls-flex {
+    display: flex;
+
+    width: 100%;
+
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: center;
+
+    .table-title {
+      flex-grow: 2;
+    }
+
+    > div {
+      margin-left: 10px;
+
+      &:nth-child(1) {
+        margin-left: 0;
+      }
+      &.table-title {
+        margin-left: 15px;
+      }
+    }
+  }
+}
+
+.options-wrap {
+  .toggle-icon {
+    cursor: pointer;
+  }
+  .options-panel {
+    position: absolute;
+
+    padding-top: 1.8rem;
+
+    z-index: 1000;
+
+    .columns {
+      position: relative;
+
+      background-color: lighten($headerColor, 5%);
+
+      list-style: none;
+      box-shadow: $shadow;
+
+      > li {
+        padding: 5px 10px;
+
+        color: darken(white, 15%);
+
+        text-align: left;
+        white-space: nowrap;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $headerColor;
+        }
+        &.active {
+          color: white;
+        }
+      }
+    }
+  }
+}

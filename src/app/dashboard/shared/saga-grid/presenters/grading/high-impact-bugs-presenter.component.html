@@ -1,0 +1,5 @@
+<div [ngStyle]='cellStyle'>
+  <!--<span *ngIf='grade.releaseCritical.length'><a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{grade.releaseCritical.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'>Release({{grade.releaseCritical.length}})</a></span>-->
+  <span *ngIf='grade.allCritical.length'><a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{grade.allCritical.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'>Red({{grade.allCritical.length}})</a></span>
+  <span *ngIf='grade.releaseCritical.length === 0 && grade.allCritical.length === 0'>{{grade.gradeText}}</span>
+</div>

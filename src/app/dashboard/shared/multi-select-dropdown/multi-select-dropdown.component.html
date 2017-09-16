@@ -1,0 +1,63 @@
+<div class='dropdown'>
+
+  <button
+    type='button'
+    class='dropdown-toggle'
+    [ngClass]='settings.buttonClasses'
+    (click)='toggleDropdown()'
+    [disabled]='disabled'>
+    <div class='title'>{{ title }}&nbsp;</div>
+    <div class='dd-indicator'><i class='fa fa-chevron-down'></i></div>
+  </button>
+
+  <ul
+    *ngIf='isVisible'
+    class='dd-menu'
+    [style.max-height]='settings.maxHeight'>
+    <li class='dropdown-item search' *ngIf='settings.enableSearch'>
+      <div class='area-search'>
+        <div
+          class='clickable search-icon'><i class='fa fa-search'></i></div>
+        <input
+          type='text'
+          class='form-control'
+          placeholder='{{texts.searchPlaceholder}}'
+          [(ngModel)]='searchFilterText'
+          [ngModelOptions]='{standalone: true}'>
+        <div
+          class='clickable clear-search'
+          [class.disabled]='searchFilterText.length === 0'
+          (click)='clearSearch($event)'><i class='fa fa-times'></i></div>
+      </div>
+    </li>
+    <li
+      *ngIf='settings.showUncheckAll'
+      class='dd-item clickable'
+      (click)='uncheckAll()'>
+      <div
+        class='area-clear'
+        [class.disabled]='numSelected === 0'>
+        <div class='clear-areas-icon'><i class='fa fa-times'></i></div>
+        <div class='lbl'>{{texts.uncheckAll}}</div>
+      </div>
+    </li>
+    <li
+      *ngFor='let option of options | searchFilter : searchFilterText'
+      class='dd-item clickable'
+      [ngStyle]='getItemStyle(option)'
+      (click)='setSelected($event, option)'>
+      <div class='item-option'>
+        <div class="check">
+          <input
+            type='checkbox'
+            [checked]='isSelected(option)'
+            (click)='preventCheckboxCheck($event, option)' />
+        </div>
+        <span
+          class='item'
+          [ngClass]='settings.itemClasses'>{{option.name}}</span>
+      </div>
+    </li>
+  </ul>
+
+</div>

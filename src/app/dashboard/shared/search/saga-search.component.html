@@ -1,0 +1,132 @@
+<section class='search-options'>
+
+  <div class='row primary'>
+
+    <div class="col-sm-5">
+      <div class='areaPath search-item'>
+        <label for='areaPath'>Area Paths</label>
+        <div>
+          <multiselect-dropdown
+            [options]="multiSelectOptions"
+            [settings]='multiSelectSettings'
+            [texts]='multiSelectTexts'
+            [(ngModel)]="areaPaths"
+            (ngModelChange)="onAreaPathChanged($event)"></multiselect-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class='release search-item' [class.disabled]='!searchControlMask.release'>
+        <label for='release'>Release</label>
+        <div>
+          <forms-select
+            [options]='releaseOptions'
+            [selectedOption]='release'
+            (optionChange)='onReleaseChanged($event)'
+            [disabled]='!searchControlMask.release'></forms-select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-5">
+      <div class='promise search-item' [class.disabled]='!searchControlMask.promise'>
+        <label for='promise'>Promise</label>
+        <div>
+          <forms-select
+            [options]='promiseOptions'
+            [selectedOption]='promise'
+            (optionChange)='onPromiseChanged($event)'
+            [disabled]='!searchControlMask.promise'></forms-select>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class='row secondary'>
+
+    <div class="col-sm-2">
+      <div class='iterationPath search-item' [class.disabled]='!searchControlMask.iteration'>
+          <label for='iterationPath'>Iteration</label>
+          <div>
+            <forms-select
+              [options]='iterationPathOptions'
+              [selectedOption]='iterationPath'
+              (optionChange)='onIterationChanged($event)'
+              [disabled]='!searchControlMask.iteration'></forms-select>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-sm-10">
+      <div class="row">
+
+        <div class="col-sm-3">
+            <div class='inPmGroup search-item' [class.disabled]='!searchControlMask.pmGroupLead'>
+              <label for='inPmGroup'>In PM Group</label>
+              <div>
+                <forms-select
+                  [options]='pmGroupLeadOptions'
+                  [selectedOption]='pmGroupLead'
+                  (optionChange)='onPmGroupLeadChanged($event)'
+                  [disabled]='!searchControlMask.pmGroupLead'></forms-select>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-sm-3">
+            <div class='inDevGroup search-item' [class.disabled]='!searchControlMask.devGroupLead'>
+              <label for='inDevGroup'>In Dev Group</label>
+              <div>
+                <forms-select
+                  [options]='devGroupLeadOptions'
+                  [selectedOption]='devGroupLead'
+                  (optionChange)='onDevGroupLeadChanged($event)'
+                  [disabled]='!searchControlMask.devGroupLead'></forms-select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class='inDnaGroup search-item' [class.disabled]='!searchControlMask.dnaGroupLead'>
+              <label for='inDnaGroup'>In DnA Group</label>
+              <div>
+                <forms-select
+                  [options]='dnaGroupLeadOptions'
+                  [selectedOption]='dnaGroupLead'
+                  (optionChange)='onDnaGroupLeadChanged($event)'
+                  [disabled]='!searchControlMask.dnaGroupLead'></forms-select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class='inDesignGroup search-item' [class.disabled]='!searchControlMask.designGroupLead'>
+              <label for='inDesignGroup'>In Design Group</label>
+              <div>
+                <forms-select
+                  [options]='designGroupLeadOptions'
+                  [selectedOption]='designGroupLead'
+                  (optionChange)='onDesignGroupLeadChanged($event)'
+                  [disabled]='!searchControlMask.designGroupLead'></forms-select>
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <button
+        type='button'
+        class='btn btn-search'
+        (click)='triggerSearch()'
+        [disabled]='searchStatus !== "ready"'><span *ngIf='searchStatus === "ready"'>Search</span><i *ngIf='searchStatus !== "ready"' class='fa fa-refresh fa-spin'></i></button>
+    </div>
+  </div>
+
+</section>

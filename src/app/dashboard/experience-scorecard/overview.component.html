@@ -1,0 +1,17 @@
+
+<div class='overall-summary'>Across the five core areas we looked at, most experiences in both Edge and Chrome were rated as highly usable and familiar. Chrome received slightly higher ratings overall, but generally by very small margins.</div>
+
+<section class='top-issues'>
+  <div class='title'>Top Issues</div>
+  <ol>
+    <li><span class="label">Tabs:</span><span class="description">Moving tabs between and within windows in Edge is more difficult than in Chrome.</span></li>
+    <li><span class="label">Newsfeed on NTP:</span><span class="description">Newsfeed on NTP has low usefulness for most users.</span></li>
+    <li><span class="label">Apps on the NTP:</span><span class="description">App installation links on the NTP create usability problems for new users and funnel them out of Edge.</span></li>
+    <li><span class="label">Favorites:</span><span class="description">Favorites in Edge are usable, but less desirable than bookmarks in Chrome.</span></li>
+    <li><span class="label">Personality:</span><span class="description">Edge’s app icon and layout are less desirable than Chrome’s.</span></li>
+  </ol>
+</section>
+
+<div class='card-wrap' *ngIf='scorecardData'>
+  <browser-card *ngFor='let data of scorecardData' [browserScore]='data'></browser-card>
+</div>

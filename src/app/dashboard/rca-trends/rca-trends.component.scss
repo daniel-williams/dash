@@ -1,0 +1,75 @@
+$headerColor: #b1b4ba;
+$calcHeaderColor: #5b79c0;
+$shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+
+.chart-layout {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+
+  width: 100%;
+
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+
+  .chart-sizer {
+    width: 100%;
+    // min-width: 350px;
+
+    canvas {
+      position: relative;
+    }
+  }
+}
+
+.options-wrap {
+  .toggle-icon {
+    cursor: pointer;
+  }
+  .options-panel {
+    position: absolute;
+
+    padding-top: 1.8rem;
+
+    z-index: 1000;
+
+    .option-items {
+      position: relative;
+
+      background-color: lighten($headerColor, 5%);
+
+      list-style: none;
+      box-shadow: $shadow;
+
+      > li {
+        padding: 5px 10px;
+
+        color: darken(white, 15%);
+
+        text-align: left;
+        white-space: nowrap;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $headerColor;
+        }
+        &.active {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+#canvasImage {
+  overflow: hidden;
+
+  width: 1px;
+  height: 1px;
+}
+
+.tooltip-item {
+  margin: 4px 0 8px;
+}

@@ -1,0 +1,14 @@
+textarea {
+  min-width: 250px;
+  min-height: 100px;
+}
+.controls {
+  margin-top: 5px;
+
+  button {
+    margin-left: 10px;
+  }
+  button:nth-child(1) {
+    margin-left: 0;
+  }
+}

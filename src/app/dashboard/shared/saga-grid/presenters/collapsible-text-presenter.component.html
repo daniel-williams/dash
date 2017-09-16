@@ -1,0 +1,2 @@
+<div *ngIf='collapsed' [title]='data' (click)='toggle($event)'>{{ data | ellipsis : length || 60 : sizeRelative }}</div>
+<div *ngIf='!collapsed' [title]='data' (click)='toggle($event)'>{{ data }}</div>

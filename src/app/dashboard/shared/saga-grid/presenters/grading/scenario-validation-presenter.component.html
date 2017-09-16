@@ -1,0 +1,5 @@
+<div [ngStyle]='cellStyle'>
+  <span *ngIf='grade.red.length'><a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{grade.red.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'>red({{grade.red.length}})</a></span>
+  <span *ngIf='grade.yellow.length'><a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{grade.yellow.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'>yellow({{grade.yellow.length}})</a></span>
+  <span *ngIf='grade.red.length === 0 && grade.yellow.length === 0'>{{grade.gradeText}}</span>
+</div>

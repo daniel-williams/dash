@@ -1,0 +1,382 @@
+<div class="container-fluid pt20">
+  <section class="page" #clickTarget>
+
+      <div class='panel-test'>
+        <button class="ms-Button ms-Button--hero">
+          <span class="ms-Button-icon"><i class="ms-Icon ms-Icon--Help"></i></span> 
+          <span class="ms-Button-label">Grading FAQ</span> 
+        </button>
+
+        <div class="ms-Panel ms-Panel--xxl">
+          <button class="ms-Panel-closeButton ms-PanelAction-close">
+            <i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>
+          </button>
+          <div class="ms-Panel-contentInner rubric-panel">
+            <h1>Scenario Readiness Grading</h1>
+            <div class="ms-Pivot ms-Pivot--tabs">
+              <ul class="ms-Pivot-links">
+                <li class="ms-Pivot-link is-selected" data-content="overview" title="Overview" tabindex="1">Overview</li>
+                <li class="ms-Pivot-link" data-content="overallGrade" title="Overall Grade" tabindex="1">Overall Grade</li>
+                <li class="ms-Pivot-link" data-content="state" title="State" tabindex="1">State</li>
+                <li class="ms-Pivot-link" data-content="scenarioValidation" title="Scenario Validation" tabindex="1">Scenario Validation</li>
+                <li class="ms-Pivot-link" data-content="completeness" title="Completeness" tabindex="1">Completeness</li>
+                <li class="ms-Pivot-link" data-content="highImpact" title="High Impact Bugs" tabindex="1">High Impact Bugs</li>
+                <li class="ms-Pivot-link" data-content="telemetry" title="Telemetry" tabindex="1">Telemetry (RQV only)</li>
+                <li class="ms-Pivot-link" data-content="customerFeedback" title="Customer Feedback" tabindex="1">Customer Feedback</li>
+                <li class="ms-Pivot-link" data-content="accessibility" title="Accessibility" tabindex="1">Accessibility</li>
+                <li class="ms-Pivot-link" data-content="craftsmanship" title="Craftsmanship" tabindex="1">Craftsmanship</li>
+                <li class="ms-Pivot-link" data-content="riskAssessment" title="Risk Assessment" tabindex="1">Risk Assessment</li>
+              </ul>
+              <div class="ms-Pivot-content ms-u-slideLeftIn40" data-content="overview">
+                <h2>Overview</h2>
+                <p>The primary purpose of readiness grading is to determine if a given Scenario is ready to ship and meeting the
+                  goals we set out to achieve.</p>
+                <p>The following criteria is used to determine which Scenarios to display and grade;</p>
+                <ul>
+                  <li>Scenario State is not equal to Cut</li>
+                  <li>Scenario is tagged for Readiness within a specific release, e.g., EDGE_RS2_READINESS, EDGE_RS3_READINESS, etcetera</li>
+                  <li>Scenarios tagged with EDGE_CORE_SCENARIO_READINESS are also included as legacy scenarios</li>
+                  <li>Search filters (Area Paths, Release, etcetera)</li>
+                </ul>
+              </div>
+              <div class="ms-Pivot-content ms-u-slideLeftIn40" data-content="overallGrade">
+                <h2>Overall Grade</h2>
+                <p>description needed...</p>
+                <h3>Possible Values</h3>
+                <p>Score displayed as percentage from 0% - 100%.</p>
+                <h3>Grading Details</h3>
+                <p>For all graded columns, the following formula is used to calculate the overall score.</p>
+                <div class='rubric-item'>(( [# of green items] * 1.0 ) + ( [# of yellow items] * 0.5 )) / [# of items excluding gray items]</div>
+              </div>
+              <div class="ms-Pivot-content ms-u-slideLeftIn40" data-content="state">
+                <h2>State</h2>
+                <p>Tracks which scenario are committed, completed vs proposed. Scenario is committed once scenario and scenario assessment spec reviews are completed and deliverables are identified.</p>
+                <h3>Possible States</h3>
+                <p>Green, Red, Gray</p>
+                <h3>Grading Details</h3>
+                <p>The Scenario State field is used to determine this grade.</p>
+                <div class='rubric-item'>
+                  <h4>Red</h4>
+                  <p>The grade is Red if;</p>
+                  <ul>
+                    <li>State = Proposed</li>
+                  </ul>
+                  <h4>Green</h4>
+                  <p>Otherwise, the Grade is Green if;</p>
+                  <ul>
+                    <li>State = Committed</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="ms-Pivot-content ms-u-slideLeftIn40" data-content="scenarioValidation">
+                <h2 style='margin-bottom:5px;'>Scenario Validation</h2>
+                <div style='margin-bottom:20px;'>owners: <a href='mailto:drubino@microsoft.com'>David Rubino</a> &amp; <a href='mailto:joonc@microsoft.com'>Joon Chang</a></div>
+                <p>All (applicable) user facing scenarios will be manually tested and assessed by vendors to identify issues impacting customer experiences.</p>
+                <h3>Possible States</h3>
+                <p>Green, Yellow, Red, Gray (Not Applicable), Gray (Not Yet Graded)</p>
+                <h3>Grading Details</h3>
+                <p>Both the Scenario and related Bugs are used to determine this grade.</p>
+                <div class='rubric-item'>
+                  <h4>Gray (Not Applicable)</h4>
+                  <p>The grade is Gray (Not Applicable) if;</p>
+                  <ul>
+                    <li>Scenario Tags contain SCENARIO_VALIDATION_NA</li>
+                  </ul>
+
+                  <h4>Gray (Not Yet Graded)</h4>
+                  <p>The grade is Gray (Not Yet Graded) if;</p>
+                  <ul>
+                    <li>Scenario Tags contain SCENARIO_VALIDATION_TBD</li>
+                  </ul>
+
+                  <h4>Red</h4>
+                  <p>Otherwise, the grade is Red if any related bugs meet the following criteria;</p>
+                  <ul>
+                    <li>Contains the tag SCENARIO_VALIDATION_RED</li>
+                  </ul>
+                  
+                  <h4>Yellow</h4>
+                  <p>Otherwise, the grade is Yellow if any related Bugs meet the following criteria;</p>
+                  <ul>
+                    <li>Contains the tag SCENARIO_VALIDATION_YELLOW</li>
+                  </ul>
+
+                  <h4>Green</h4>
+                  <p>Otherwise, the grade is Green.</p>
+                </div>
+              </div>
+              <div class="ms-Pivot-content ms-u-slideLeftIn40" data-content="completeness">
+                <h2>Completeness</h2>
+                <p>Once entering a stabilization phase, we’d expect all feature deliverables should be completed.</p>
+                <h3>Possible States</h3>
+                <p>Green, Yellow, Red, Gray (Not Applicable)</p>
+                <h3>Grading Details</h3>
+                <p>For a given Scenario, find related Deliverables that meet the following criteria;</p>
+                <ul>
+                  <li>State &lt;&gt; Cut</li>
+                  <li>Product Family = Windows</li>
+                  <li>Related Deliverables will also be constrained to a specific release if a release is specified as search criteria</li>
+                </ul>
+                <div class='rubric-item'>
+                  <h4>Green</h4>
+                  <p>The grade is Green when all related Deliverables meet the following criteria;</p>
+                  <ul>
+                    <li>State = Completed</li>
+                  </ul>
+
+                  <h4>Yellow</h4>
+                  <p>Otherwise, the grade is Yellow when one or more Deliverables meet the following criteria;</p>
+                  <ul>
+                    <li>State &lt;&gt; Completed</li>
+                    <li>Rank &gt; 100 or Rank contains no value</li>
+                  </ul>
+
+                  <h4>Red</h4>
+                  <p>Otherwise, the grade is Red when one or more Deliverables meet the following criteria;</p>
+                  <ul>
+                    <li>State &lt;&gt; Completed</li>
+                    <li>Rank &lt;= 100</li>
+                  </ul>
+
+                  <h4>Gray (Not Applicable)</h4>
+                  <p>Otherwise, the grade is Gray (Not Applicable)</p>
+                </div>
+              </div>
+              <div class="ms-Pivot-content ms-u-slideLeftIn40" data-content="highImpact">
+                <h2>High Impact Bugs</h2>
+                <p>Tracks all engineering signoff blocking bugs impacting product health and user experiences.</p>
+                <h3>Possible States</h3>
+                <p>Red, Green</p>
+                <h3>Grading Details</h3>
+                <p></p>
+                <div class='rubric-item'>
+                  <h4>Red</h4>
+                  <p>The grade is Red if any related bugs meet any of the following conditions;</p>
+                  <ul>
+                    <li>Blocking = Engineering Sign-off
+                      <p style='margin-top: 15px'>* note that high impact bugs are expected to encompass;</p>
+                      <ul>
+                        <li>Hot Bugs (i.e., Hot Bug = Approved)</li>
+                        <li>Edge Crit bugs, where Bug Tags contain both EDGE_CRIT and EDGEAPPROVED</li>
+                        <li>Bugs that contain the tag EDGEREL_RED</li>
+                      </ul>
+                    </li>
+                  </ul>
+
+                  <h4>Green</h4>
+                  <p>Otherwise the grade is Green.</p>
+                </div>
+              </div>
+              <div class="ms-Pivot-content ms-u-slideLeftIn40" data-content="telemetry">
+                <h2 style='margin-bottom:5px;'>Telemetry (RQV only)</h2>
+                <div style='margin-bottom:20px;'>owners: <a href='mailto:willf@microsoft.com'>Will Frasier</a> &amp; <a href='mailto:karthijg@microsoft.com'>Karthick Kumar Judun Gopichandranath</a></div>
+                <p>Tracks the product perf, reliability, accessibility and usage health leveraging telemetry data.</p>
+                <h3>Possible States</h3>
+                <p>Green, Yellow, Red, Gray (CTQ Not Required)</p>
+                <h3>Grading Details</h3>
+                <p>For a given scenario, we determine the number of related CTQ Measures and determine their states by looking at incoming telemetry data from Mission Control. This yields the number of measures that are passing, failing, or need more data.</p>
+                <div class='rubric-item'>
+                  <h4>Gray (CTQ Not Required)</h4>
+                  <p>The Scenario meets one of the following conditions;</p>
+                  <ul>
+                    <li>Contains the tag CTQ_TESTCVG_EXIST</li>
+                    <li>Contains the tag CTQ_TESTCVG_NEEDED</li>
+                  </ul>
+
+                  <h4>Red</h4>
+                  <p>The grade is Red if;</p>
+                  <ul>
+                    <li>One or more CTQ Measures are failing</li>
+                  </ul>
+
+                  <h4>Yellow</h4>
+                  <p>Otherwise, the grade is Yellow if;</p>
+                  <ul>
+                    <li>One or more CTQ Measures have insufficient data or no data</li>
+                  </ul>
+
+                  <h4>Green</h4>
+                  <p>Otherwise, the grade is Green.</p>
+                </div>
+              </div>
+              <div class="ms-Pivot-content ms-u-slideLeftIn40" data-content="customerFeedback">
+                <h2 style='margin-bottom:5px;'>Customer Feedback</h2>
+                <div style='margin-bottom:20px;'>owners: <a href='mailto:drubino@microsoft.com'>David Rubino</a></div>
+                <p>For a given scenario, we look at active feedback items associated with a scenario and make a determination if any of the feedback items should cause the scenario to be yellow or red.</p>
+                <h3>Possible States</h3>
+                <p>Green, Yellow, Red</p>
+                <h3>Grading Details</h3>
+                <p>To determine this grade, we look at all related Bugs where;</p>
+                <ul>
+                  <li>Bug State = Active</li>
+                  <li>Issue Type = Data</li>
+                </ul>
+                <p>Related Bugs are triaged into the following categories that are then used in grading;</p>
+                <ul>
+                  <li>Red = Bug Tags contain FEEDBACK_RED</li>
+                  <li>Yellow = Bug Tags contain FEEDBACK_YELLOW</li>
+                </ul>
+                <div class='rubric-item'>
+                  <h4>Red</h4>
+                  <p>The grade is Red if;</p>
+                  <ul>
+                    <li>One or more related Bugs fall into the Red category</li>
+                  </ul>
+
+                  <h4>Yellow</h4>
+                  <p>Otherwise, the grade is Yellow if;</p>
+                  <ul>
+                    <li>One or more related Bugs fall into the Yellow category</li>
+                  </ul>
+
+                  <h4>Green</h4>
+                  <p>Otherwise, the grade is Green.</p>
+                </div>
+              </div>
+              <div class="ms-Pivot-content ms-u-slideLeftIn40" data-content="accessibility">
+                <h2 style='margin-bottom:5px;'>Accessibility</h2>
+                <div style='margin-bottom:20px;'>owners: <a href='mailto:billyang@microsoft.com'>Bill Yang</a> &amp; <a href='mailto:roryfa@microsoft.com'>Rory Fairweather</a></div>
+                <p>Tracks the health of accessibility.</p>
+                <h3>Possible States</h3>
+                <p>Green, Yellow, Red, Gray (Not Applicable)</p>
+                <h3>Grading Details</h3>
+                <p>Related Bugs are triaged into the following categories that are then used in grading;</p>
+                <ul>
+                  <li>Red = Bug Tags contain ACCSELFRED</li>
+                  <li>Yellow = Bug Tags contain ACCSELFYELLOW</li>
+                  <li>Lime = Bug Tags contain ACCSELFLIME</li>
+                </ul>
+                <div class='rubric-item'>
+                  <h4>Gray (Not Applicable)</h4>
+                  <p>The grade is Gray (Not Applicable) if;</p>
+                  <ul>
+                    <li>Scenario Tags contain EDGE_READINESS_ACCESSIBILITY-NA</li>
+                  </ul>
+
+                  <h4>Red</h4>
+                  <p>Otherwise, the grade is Red if;</p>
+                  <ul>
+                    <li>One or more related Bugs fall into the Red or Yellow categories</li>
+                  </ul>
+
+                  <h4>Yellow</h4>
+                  <p>Otherwise, the grade is Yellow if;</p>
+                  <ul>
+                    <li>More than five related Bugs fall into the Lime category</li>
+                  </ul>
+
+                  <h4>Green</h4>
+                  <p>Otherwise, the grade is Green.</p>
+                </div>
+              </div>
+              <div class="ms-Pivot-content ms-u-slideLeftIn40" data-content="craftsmanship">
+                <h2 style='margin-bottom:5px;'>Craftsmanship</h2>
+                <div style='margin-bottom:20px;'>owners: <a href='mailto:danie@microsoft.com'>Danielle Ellbogen</a> &amp; <a href='mailto:v-mictho@microsoft.com'>Michael Thornhill</a></div>
+                <p>Tracks the attention to detail signals a premium product that you are proud to own.</p>
+                <h3>Possible States</h3>
+                <p>Green, Yellow, Red, Gray (Not Applicable), Gray (Not Graded)</p>
+                <h3>Grading Details</h3>
+                <p>The Craftsmanship grade is determined by looking at both the Scenario and related Bugs. A Bug tag prefixed with ‘c:’ represents its current Craftsmanship Score, e.g., “c:45” has a score of 45 which is then used to triage bugs into the following categories;</p>
+                <ul>
+                  <li>Score &lt; 50</li>
+                  <li>Score &lt; 80</li>
+                  <li>Score &gt;= 80</li>
+                </ul>
+                <p>Bugs are ignored and not triaged if their Resolution field contains one of the following values;</p>
+                <ul>
+                  <li>Won’t Fix</li>
+                  <li>Duplicate</li>
+                  <li>External</li>
+                </ul>
+                <div class='rubric-item'>
+                  <h4>Gray (Not Applicable)</h4>
+                  <p>The grade is Gray (Not Applicable) if;</p>
+                  <ul>
+                    <li>Scenario contains the tag EDGE_READINESS_CRAFTSMANSHIP_NA</li>
+                  </ul>
+
+                  <h4>Red</h4>
+                  <p>Otherwise, the grade is Red when any of the following conditions are met;</p>
+                  <ul>
+                    <li>One or more Bugs have a score &lt; 50 </li>
+                    <li>More than three Bugs have a score &lt; 80</li>
+                  </ul>
+
+                  <h4>Yellow</h4>
+                  <p>Otherwise, the grade is Yellow when any of the following conditions are met;</p>
+                  <ul>
+                    <li>One or more Bugs have a score &lt; 80</li>
+                    <li>Nine or more Bugs have a score &gt;= 80</li>
+                  </ul>
+
+                  <h4>Green</h4>
+                  <p>Otherwise, the grade is Green if any of the following conditions are true;</p>
+                  <ul>
+                    <li>There are less than 9 Bugs scored &gt;= 80</li>
+                    <li>There are zero Bugs (scored or not)</li>
+                  </ul>
+
+                  <h4>Gray (Not Graded)</h4>
+                  <p>Otherwise, if there are bugs (scored or not) and the Scenario tag CRAFTSMANSHIPREVIEWED exists, the grade is Gray (Not Graded).</p>
+                </div>
+              </div>
+              <div class="ms-Pivot-content ms-u-slideLeftIn40" data-content="riskAssessment">
+                <h2 style='margin-bottom:5px;'>Risk Assessment</h2>
+                <div style='margin-bottom:20px;'>owners: PM scenario owners</div>
+                <p>Tracks the risk assessment of scenario.  PM scenario owners to review all the scenario readiness metrics to determine if their scenarios can confidently land for RS3 with high quality.</p>
+                <h3>Possible States</h3>
+                <p>Green, Red, Gray (Not Applicable)</p>
+                <h3>Grading Details</h3>
+                <p>The value of the Scenario’s Risk Assessment property is used to determine this grade.</p>
+                <div class='rubric-item'>
+                  <h4>Red</h4>
+                  <p>The grade is Red if;</p>
+                  <ul>
+                    <li>Risk Assessment = Off Track</li>
+                  </ul>
+
+                  <h4>Yellow</h4>
+                  <p>Otherwise, the grade is Yellow if;</p>
+                  <ul>
+                    <li>Risk Assessment = At Risk</li>
+                  </ul>
+
+                  <h4>Green</h4>
+                  <p>Otherwise, the grade is Green if;</p>
+                  <ul>
+                    <li>Risk Assessment = On Track</li>
+                  </ul>
+
+                  <h4>Gray (Not Graded)</h4>
+                  <p>Otherwise, the grade is Gray (Not Graded).</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    <header class='grid-heading'>
+      <h1>Scenario Readiness</h1>
+
+      <div class="ms-Toggle" style='margin-right:30px;margin-bottom:0'>
+        <span class="ms-Toggle-description">Include Core Legacy</span>
+        <input type="checkbox" id="demo-toggle-3" class="ms-Toggle-input" (change)='legacyToggle($event)' />
+        <label for="demo-toggle-3" class="ms-Toggle-field is-selected" tabindex="0">
+          <span class="ms-Label ms-Label--off">No</span>
+          <span class="ms-Label ms-Label--on">Yes</span>
+        </label>
+      </div>
+    </header>
+
+    <saga-grid
+      #itemGrid
+      [data]='filteredGridData'
+      [schema]='gridSchema'
+      [title]='tableTitle'
+      [showTotals]=true
+      (save)='onSave($event)'></saga-grid>
+
+  </section>
+</div>

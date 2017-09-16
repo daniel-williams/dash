@@ -1,0 +1,58 @@
+# area paths from root
+
+GET https://microsoft.visualstudio.com/DefaultCollection/OS/_apis/wit/classificationnodes/areas/WE/EDGE?api-version=1.0&$depth=10 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic di13aWxkYW5AbWljcm9zb2Z0LmNvbTpvMmxobm10aDNrYTN6emRld3FoMmR1YjVneTdzbXZ0eXN4eGM1YWltdXR5eWFoZWt0bTRx
+Accept-Encoding: gzip, deflate
+
+
+
+
+# workitems by id w/o fields
+
+GET https://microsoft.visualstudio.com/DefaultCollection/_apis/wit/WorkItems?api-version=1.0&ids=576608,5648768,10527514,10582582,11461247 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic di13aWxkYW5AbWljcm9zb2Z0LmNvbTpvMmxobm10aDNrYTN6emRld3FoMmR1YjVneTdzbXZ0eXN4eGM1YWltdXR5eWFoZWt0bTRx
+Accept-Encoding: gzip, deflate
+
+
+# workitems by id w/fields
+
+GET https://microsoft.visualstudio.com/DefaultCollection/_apis/wit/WorkItems?api-version=1.0&ids=576608,5648768,10527514,10582582,11461247&fields=OSG.Rank HTTP/1.1
+Content-Type: application/json
+Authorization: Basic di13aWxkYW5AbWljcm9zb2Z0LmNvbTpvMmxobm10aDNrYTN6emRld3FoMmR1YjVneTdzbXZ0eXN4eGM1YWltdXR5eWFoZWt0bTRx
+Accept-Encoding: gzip, deflate
+
+
+
+# using workitem query language
+
+POST https://microsoft.visualstudio.com/DefaultCollection/_apis/wit/wiql?api-version=1.0 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic di13aWxkYW5AbWljcm9zb2Z0LmNvbTpvMmxobm10aDNrYTN6emRld3FoMmR1YjVneTdzbXZ0eXN4eGM1YWltdXR5eWFoZWt0bTRx
+Accept-Encoding: gzip, deflate
+
+{
+  "query": "Select [System.WorkItemType],[System.Title],[System.State] From WorkItems Where [System.State] <> 'cut' and [System.WorkItemType] = 'Scenario' and [System.Tags] Contains 'EDGE_RS2_READINESS'"
+}
+
+
+# related workitems
+
+POST https://microsoft.visualstudio.com/DefaultCollection/_apis/wit/wiql?api-version=1.0 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic di13aWxkYW5AbWljcm9zb2Z0LmNvbTpvMmxobm10aDNrYTN6emRld3FoMmR1YjVneTdzbXZ0eXN4eGM1YWltdXR5eWFoZWt0bTRx
+Accept-Encoding: gzip, deflate
+
+{"query": "
+SELECT
+  [Target].[System.Id],
+  [Target].[System.WorkItemType]
+FROM
+  WorkItemLinks
+WHERE
+  ([System.Links.LinkType] = 'Child' OR [System.Links.LinkType] = 'Related') AND
+  [Source].[System.Id] in (576608, 5648768) And
+  [Target].[System.WorkItemType] in ('Deliverable', 'Measure', 'Bug') And
+  [Target].[System.State] <> 'Cut'
+"}

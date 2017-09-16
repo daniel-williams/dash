@@ -1,0 +1,15 @@
+<div class="container-fluid pt20">
+  <section class='page' #clickTarget>
+
+    <header class='grid-heading'>
+      <h1>Deliverables</h1>
+      <button class='ms-Button' (click)='applyCommitmentSort()'>Commitment Review Sort</button>
+    </header>
+
+    <saga-grid #itemGrid
+      [data]='gridData'
+      [schema]='gridSchema'
+      [title]='tableTitle'></saga-grid>
+
+  </section>
+</div>

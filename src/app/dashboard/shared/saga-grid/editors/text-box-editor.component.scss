@@ -1,0 +1,9 @@
+.options {
+  margin-top: 5px;
+  a {
+    margin-left: 5px;
+  }
+  a:nth-child(0) {
+    margin-left: 0;
+  }
+}

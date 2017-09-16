@@ -1,0 +1,28 @@
+.sort-indicator {
+  position: relative;
+  overflow: hidden;
+
+  margin-right: -12px;
+  height: 20px;
+
+  .asc, .desc {
+    position: relative;
+    overflow: hidden;
+
+    height: 5px;
+
+    font-size: 5px;
+    line-height: 1;
+
+    text-align: center;
+  }
+  .order {
+    position: relative;
+    overflow: hidden;
+
+    font-size: 10px; font-size: 1.0rem;
+    line-height: 1;
+
+    text-align: center;
+  }
+}

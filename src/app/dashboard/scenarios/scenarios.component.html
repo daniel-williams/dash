@@ -1,0 +1,286 @@
+<div class="container-fluid pt20">
+  <section class='page' #clickTarget>
+
+    <header class='tbl-options'>
+      <h1>Scenarios</h1>
+      <div class='mb10'>
+        <div class='tbl-top'>
+          <div *ngIf='!!tableTitle' class='copy-data'>
+            <i class='bowtie-copy-to-clipboard' (click)='copyToClipboard("scenario-data")'></i>
+          </div>
+          <div class='tbl-title'>{{tableTitle}}</div>
+        </div>
+      </div>
+    </header>
+
+    <table  id='scenario-data' class='scenario ms-Table'>
+      <tr class='workitem-head'>
+        <td [ngStyle]='tblHeadStyle' class='jump'></td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'id')">ID</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'rank')">Rank</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'title')">Title</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'pmOwner')">PM Owner</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'state')">State</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'release')">Release</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'iteration')">Iteration</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'remainingDays')">Remaining Days</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'risk')">Risk</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'riskComment')">Risk Comment</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'scenarioSpecStatus')">Scenario Spec</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'qualityPlanUrl')">Scenario Assessment</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'devOwner')">Dev Owner</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'qualityOwner')">DnA</td>
+      </tr>
+      <tr *ngIf='scenarios.length === 0'>
+        <td [ngStyle]='tblCellStyle' colspan='15'>no items found...</td>
+      </tr>
+      <tr *ngFor='let scenario of scenarios | sort : sort.sortOn : sort.asc' class='workitem-row'>
+        <td class='jumps nowrap' [ngStyle]='tblCellStyle'>
+          <span class='clickable' (click)='scrollTo(scenario.id)'><i class="ms-Icon bowtie-symbol-crown" style='color:rgb(119, 59, 147)'></i>&nbsp;</span>
+          <span class='clickable' (click)='scrollTo(scenario.id + "deliverables")'><i class="ms-Icon bowtie-symbol-trophy" style='color: rgb(0, 94, 255)'></i> {{scenario.deliverables.length}}</span>
+          <span class='clickable' (click)='scrollTo(scenario.id + "measures")'><i class="ms-Icon bowtie-symbol-finance" style='color: rgb(0, 156, 204)'></i> {{scenario.measures.length}}</span>
+        </td>
+        <td [ngStyle]='tblCellStyle'><a href='https://microsoft.visualstudio.com/DefaultCollection/OS/ft_edge/_workitems?id={{scenario.id}}' target='_blank'>{{scenario.id}}</a></td>
+        <td [ngStyle]='tblCellStyle'>{{scenario.rank}}</td>
+        <td [ngStyle]='tblCellStyle' title='{{scenario.title}}'>{{scenario.title | ellipsis : 100 : sizeRelative}}</td>
+        <td [ngStyle]='tblCellStyle'>{{scenario.pmOwner | shortAssignedTo}}</td>
+        <td [ngStyle]='tblCellStyle' [style.background-color]='stateColor(scenario)'>{{scenario.state}}</td>
+        <td [ngStyle]='tblCellStyle'>{{scenario.release}}</td>
+        <td [ngStyle]='tblCellStyle'>{{scenario.iteration}}</td>
+        <td [ngStyle]='tblCellStyle'>{{scenario.remainingDays || ''}}</td>
+        <td [ngStyle]='tblCellStyle' [style.background-color]='riskColor(scenario)'>{{scenario.risk}}</td>
+        <td [ngStyle]='tblCellStyle' title='{{scenario.riskComment}}'>{{scenario.riskComment | ellipsis : 100 : sizeRelative}}</td>
+        <td [ngStyle]='tblCellStyle'>
+          <div class='Specifications'>
+            <div class='nowrap'>
+              <span class='val'>
+                <span *ngIf='scenario.scenarioSpecUrl'><a href='{{scenario.scenarioSpecUrl | url}}' target='_blank'>{{scenario.scenarioSpecStatus}}</a></span>
+                <span *ngIf='!scenario.scenarioSpecUrl'>{{scenario.scenarioSpecStatus}}</span>
+              </span>
+            </div>
+          </div>
+        </td>
+        <td [ngStyle]='tblCellStyle'>
+          <div class='Specifications'>
+            <div class='nowrap'>
+              <span class='val' [ngSwitch]='!!scenario.qualityPlanUrl ? scenario.qualityPlanUrl.toLowerCase() : scenario.qualityPlanUrl'>
+                <span *ngSwitchCase='"na"'>not applicable</span>
+                <span *ngSwitchCase='"n/a"'>not applicable</span>
+                <span *ngSwitchCase='"not applicable"'>not applicable</span>
+                <span *ngSwitchCase='undefined'></span>
+                <span *ngSwitchDefault><a href='{{scenario.qualityPlanUrl | url}}' target='_blank'>assessment</a></span>
+              </span>
+            </div>
+          </div>
+        </td>
+        <td [ngStyle]='tblCellStyle'>{{scenario.devOwner | shortAssignedTo}}</td>
+        <td [ngStyle]='tblCellStyle'>{{scenario.qualityOwner | shortAssignedTo}}</td>
+      </tr>
+    </table>
+
+  </section>
+
+  <section *ngFor='let scenario of scenarios' class='mb100'>
+
+    <header id='{{scenario.id}}' class='workitem-header mb50'>
+      <div class="toTop">
+        <i class='fa fa-arrow-up fa-2x clickable' (click)='scrollTo("top")'></i>
+      </div>
+      <div class='title'>
+        <h1 style='margin:0 0 10px'>Scenario</h1>
+        <div style='margin:0 0 5px'><a href='https://microsoft.visualstudio.com/DefaultCollection/OS/ft_edge/_workitems?id={{scenario.id}}' target='_blank'>{{scenario.id}}</a></div>
+        <h2 style='margin: 0 0 10px'>{{scenario.shortname}}</h2>
+        <div>{{scenario.title}}</div>
+      </div>
+    </header>
+
+    <div id='{{scenario.id+"deliverables"}}' class='workitems-frame mb25'>
+      <h3>Deliverables</h3>
+      <div class='mb10'>
+        <div class='tbl-top'>
+          <div class='copy-data'>
+            <i class='bowtie-copy-to-clipboard' (click)='copyToClipboard("" + scenario.id + "-deliverables")'></i>
+          </div>
+          <div class='tbl-title'></div>
+        </div>
+      </div>
+      <table id='{{scenario.id}}-deliverables' class='deliverable ms-Table'>
+        <tr class='workitem-head'>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'id')">ID</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'rank')">Rank</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'shortname')">Short Name</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'title')">Title</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'devOwner')">Dev Owner</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'state')">State</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'release')">Release</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'iteration')">Iteration</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'availableDateString')">Available</td>
+
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'originalEstimate')">Original Estimate</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'remainingDays')">Remaining Days</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'risk')">Risk</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'riskComment')">Risk Comment</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'compliance')">Compliance</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'funcSpecStatus')">Func Spec</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'devDesignStatus')">Dev Design</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'pmOwner')">PM Owner</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'qualityOwner')">DnA Owner</td>
+        </tr>
+        <tr *ngIf='scenario.deliverables.length === 0'>
+          <td [ngStyle]='tblCellStyle' colspan='17'>no items found...</td>
+        </tr>
+        <tr *ngFor='let deliverable of scenario.deliverables | sort : scenario.dsort.sortOn : scenario.dsort.asc' class='workitem-row'>
+          <td [ngStyle]='tblCellStyle'><a href='https://microsoft.visualstudio.com/DefaultCollection/OS/ft_edge/_workitems?id={{deliverable.id}}' target='_blank'>{{deliverable.id}}</a></td>
+          <td [ngStyle]='tblCellStyle'>{{deliverable.rank}}</td>
+          <td [ngStyle]='tblCellStyle' title='{{deliverable.shortname}}'>{{deliverable.shortname}}</td>
+          <td [ngStyle]='tblCellStyle' title='{{deliverable.title}}'>{{deliverable.title | ellipsis : 100}}</td>
+          <td [ngStyle]='tblCellStyle'>{{deliverable.devOwner | shortAssignedTo}}</td>
+          <td [ngStyle]='tblCellStyle' [style.background-color]='stateColor(deliverable)'>{{deliverable.state}}</td>
+          <td [ngStyle]='tblCellStyle'>{{deliverable.release}}</td>
+          <td [ngStyle]='tblCellStyle'>{{deliverable.iteration}}</td>
+          <td [ngStyle]='tblCellStyle'>{{deliverable.availableDateString}}</td>
+          <td [ngStyle]='tblCellStyle'>{{deliverable.originalEstimate || ''}}</td>
+          <td [ngStyle]='tblCellStyle'>{{deliverable.remainingDays || ''}}</td>
+          <td [ngStyle]='tblCellStyle' [style.background-color]='riskColor(deliverable)'>{{deliverable.risk}}</td>
+          <td [ngStyle]='tblCellStyle'>{{deliverable.riskComment}}</td>
+          <td [ngStyle]='tblCellStyle' [style.background-color]='complianceColor(deliverable)'>{{deliverable.compliance}}</td>
+          <td [ngStyle]='tblCellStyle'>
+            <div class='Specifications'>
+              <div class='nowrap'>
+                <span class='val'>
+                  <span *ngIf='deliverable.funcSpecUrl'><a href='{{deliverable.funcSpecUrl | url}}' target='_blank'>{{deliverable.funcSpecStatus}}</a></span>
+                  <span *ngIf='!deliverable.funcSpecUrl'>{{deliverable.funcSpecStatus}}</span>
+                </span>
+              </div>
+            </div>
+          </td>
+          <td [ngStyle]='tblCellStyle'>
+            <div class='Specifications'>
+              <div class='nowrap'>
+                <span class='val'>
+                  <span *ngIf='deliverable.devDesignUrl'><a href='{{deliverable.devDesignUrl | url}}' target='_blank'>{{deliverable.devDesignStatus}}</a></span>
+                  <span *ngIf='!deliverable.devDesignUrl'>{{deliverable.devDesignStatus}}</span>
+                </span>
+              </div>
+            </div>
+          </td>
+          <td [ngStyle]='tblCellStyle'>{{deliverable.pmOwner | shortAssignedTo}}</td>
+          <td [ngStyle]='tblCellStyle'>{{deliverable.qualityOwner | shortAssignedTo}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div id='{{scenario.id+"measures"}}' class='workitems-frame mb25'>
+      <h3>Measures</h3>
+      <div class='mb10'>
+        <div class='tbl-top'>
+          <div class='copy-data'>
+            <i class='bowtie-copy-to-clipboard' (click)='copyToClipboard("" + scenario.id + "-measures")'></i>
+          </div>
+          <div class='tbl-title'></div>
+        </div>
+      </div>
+      <table id='{{scenario.id}}-measures' class='measures ms-Table'>
+        <tr class='workitem-head'>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.msort, 'id')">ID</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.msort, 'priority')">Priority</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.msort, 'rank')">Rank</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.msort, 'measureType')">Type</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.msort, 'title')">Title</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.msort, 'iteration')">Iteration</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.msort, 'availableDateString')">Available</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.msort, 'state')">State</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.msort, 'assignedTo')">Assigned To</td>
+        </tr>
+        <tr *ngIf='scenario.measures.length === 0'>
+          <td [ngStyle]='tblCellStyle' colspan='9'>no items found...</td>
+        </tr>
+        <tr *ngFor='let measure of scenario.measures | sort : scenario.msort.sortOn : scenario.msort.asc' class='workitem-row'>
+          <td [ngStyle]='tblCellStyle'><a href='https://microsoft.visualstudio.com/DefaultCollection/OS/ft_edge/_workitems?id={{measure.id}}' target='_blank'>{{measure.id}}</a></td>
+          <td [ngStyle]='tblCellStyle'>{{measure.priority}}</td>
+          <td [ngStyle]='tblCellStyle'>{{measure.rank}}</td>
+          <td [ngStyle]='tblCellStyle'>{{measure.measureType}}</td>
+          <td [ngStyle]='tblCellStyle'>{{measure.title | ellipsis : 100}}</td>
+          <td [ngStyle]='tblCellStyle'>{{measure.iteration}}</td>
+          <td [ngStyle]='tblCellStyle'>{{measure.availableDateString}}</td>
+          <td [ngStyle]='tblCellStyle'>{{measure.state}}</td>
+          <td [ngStyle]='tblCellStyle'>{{measure.assignedTo | shortAssignedTo}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class='workitems-frame mb25'>
+      <h3>Consuming From</h3>
+      <div class='mb10'>
+        <div class='tbl-top'>
+          <div class='copy-data'>
+            <i class='bowtie-copy-to-clipboard' (click)='copyToClipboard("" + scenario.id + "-producing")'></i>
+          </div>
+          <div class='tbl-title'></div>
+        </div>
+      </div>
+      <table id='{{scenario.id}}-producing' class='producing ms-Table'>
+        <tr class='workitem-head'>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'id')">ID</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'rank')">Rank</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'shortname')">Short Name</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'title')">Title</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'devOwner')">Dev Owner</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'state')">State</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'release')">Release</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'iteration')">Iteration</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'availableDateString')">Available</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'remainingDays')">Remaining Days</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'risk')">Risk</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'riskComment')">Risk Comment</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'compliance')">Compliance</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'funcSpecStatus')">Func Spec</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'devDesignStatus')">Dev Design</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'pmOwner')">PM Owner</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'qualityOwner')">DnA Owner</td>
+        </tr>
+        <tr *ngIf='scenario.consumingFrom.length === 0'>
+          <td [ngStyle]='tblCellStyle' colspan='17'>no items found...</td>
+        </tr>
+        <tr *ngFor='let consumingFrom of scenario.consumingFrom | sort : scenario.psort.sortOn : scenario.psort.asc' class='workitem-row'>
+          <td [ngStyle]='tblCellStyle'><a href='https://microsoft.visualstudio.com/DefaultCollection/OS/ft_edge/_workitems?id={{consumingFrom.id}}' target='_blank'>{{consumingFrom.id}}</a></td>
+          <td [ngStyle]='tblCellStyle'>{{consumingFrom.rank}}</td>
+          <td [ngStyle]='tblCellStyle' title='{{consumingFrom.shortname}}'>{{consumingFrom.shortname}}</td>
+          <td [ngStyle]='tblCellStyle' title='{{consumingFrom.title}}'>{{consumingFrom.title | ellipsis : 100}}</td>
+          <td [ngStyle]='tblCellStyle'>{{consumingFrom.devOwner | shortAssignedTo}}</td>
+          <td [ngStyle]='tblCellStyle' [style.background-color]='stateColor(consumingFrom)'>{{consumingFrom.state}}</td>
+          <td [ngStyle]='tblCellStyle'>{{consumingFrom.release}}</td>
+          <td [ngStyle]='tblCellStyle'>{{consumingFrom.iteration}}</td>
+          <td [ngStyle]='tblCellStyle'>{{consumingFrom.availableDateString}}</td>
+          <td [ngStyle]='tblCellStyle'>{{consumingFrom.remainingDays || ''}}</td>
+          <td [ngStyle]='tblCellStyle' [style.background-color]='riskColor(consumingFrom)'>{{consumingFrom.risk}}</td>
+          <td [ngStyle]='tblCellStyle'>{{consumingFrom.riskComment}}</td>
+          <td [ngStyle]='tblCellStyle' [style.background-color]='complianceColor(consumingFrom)'>{{consumingFrom.compliance}}</td>
+          <td [ngStyle]='tblCellStyle'>
+            <div class='Specifications'>
+              <div class='nowrap'>
+                <span class='val'>
+                  <span *ngIf='consumingFrom.funcSpecUrl'><a href='{{consumingFrom.funcSpecUrl | url}}' target='_blank'>{{consumingFrom.funcSpecStatus}}</a></span>
+                  <span *ngIf='!consumingFrom.funcSpecUrl'>{{consumingFrom.funcSpecStatus}}</span>
+                </span>
+              </div>
+            </div>
+          </td>
+          <td [ngStyle]='tblCellStyle'>
+            <div class='Specifications'>
+              <div class='nowrap'>
+                <span class='val'>
+                  <span *ngIf='consumingFrom.devDesignUrl'><a href='{{consumingFrom.devDesignUrl | url}}' target='_blank'>{{consumingFrom.devDesignStatus}}</a></span>
+                  <span *ngIf='!consumingFrom.devDesignUrl'>{{consumingFrom.devDesignStatus}}</span>
+                </span>
+              </div>
+            </div>
+          </td>
+          <td [ngStyle]='tblCellStyle'>{{consumingFrom.pmOwner | shortAssignedTo}}</td>
+          <td [ngStyle]='tblCellStyle'>{{consumingFrom.qualityOwner | shortAssignedTo}}</td>
+        </tr>
+      </table>
+    </div>
+
+  </section>
+</div>

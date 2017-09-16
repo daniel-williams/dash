@@ -1,0 +1,81 @@
+<div class='header'>
+  <div class='browser-title'>{{browserScore.title}}</div>
+  <div *ngIf='browserScore.hasScore' class='browser-score'>{{browserScore.averageScore}}</div>
+</div>
+
+<div class='content-wrap'>
+  <div
+    class='experience-wrap'
+    *ngFor='let experience of browserScore.experienceScores'>
+
+    <div class='experience-header-wrap'>
+      <div class='experience-header'>
+        <div class='experience-title'>{{experience.title}}</div>
+        <div
+          class='experience-score'
+          [class.red]='experience.averageScore < 4'
+          [class.orange]='experience.averageScore >= 4 && experience.scoreDelta < 0'
+          *ngIf='experience.hasScore'><div class='score-wrap'>{{experience.averageScore}}</div></div>
+      </div>
+      <div class='experience-description' [class.camo]='!isEdge'>{{experience.description}}</div>
+      <div class='insights' *ngIf='experience.insights.length'>
+        <p class='insight' [class.camo]='!isEdge' *ngFor='let insight of experience.insights'>Action Item: {{insight}}</p>
+      </div>
+    </div>
+
+    <div
+      class='feature-wrap'
+      *ngFor='let feature of experience.featureScores'>
+
+      <div class='feature-row' [attr.id]='createAnchor(browserScore.title + " " + feature.title + " " + experience.title)'>
+        <div class='feature-title'><a routerLink='../feature' [queryParams]='{browser: browserScore.title, experience: experience.title, feature: feature.title}'>{{feature.title}}</a></div>
+        <div
+          class='feature-score'
+          [class.red]='feature.averageScore < 4'
+          [class.orange]='feature.averageScore >= 4 && feature.scoreDelta < 0'
+          *ngIf='feature.hasScore'><div class='score-wrap'>{{feature.averageScore}}</div></div>
+      </div>
+      <div class='feature-description' [innerHTML]='feature.description'></div>
+
+      <div *ngIf='experience.title === "Appearance";else normal'>
+        <div class='dimension-wrap appearance'>
+          <div
+            class='dimension-cell'
+            *ngFor='let dimension of feature.dimensionScores'>
+
+              <div class='dimension-title'>{{dimension.title}} <span *ngIf='dimension.wordCount' class='sentiment'>{{calculateSentiment(dimension.wordCount)}}</span></div>
+
+              <div *ngIf='dimension.wordCount'>
+                <word-cloud [data]='encodeWordCloudData(dimension.wordCount)'></word-cloud>
+              </div>
+
+          </div>
+        </div>
+      </div>
+      <ng-template #normal>
+        <div class='dimension-wrap'>
+          <div
+            class='dimension-cell'
+            *ngFor='let dimension of feature.dimensionScores'>
+
+              <div class='dimension-title'>{{dimension.title}} <span *ngIf='dimension.wordCount' class='sentiment'>{{calculateSentiment(dimension.wordCount)}}</span></div>
+              <div
+                *ngIf='dimension.hasScore'
+                [class.red]='dimension.averageScore < 4'
+                [class.orange]='dimension.averageScore >= 4 && dimension.scoreDelta < 0'
+                class='dimension-score'><div class='score-wrap'>{{dimension.averageScore}}</div></div>
+
+              <div *ngIf='dimension.wordCount'>
+                <word-cloud [data]='encodeWordCloudData(dimension.wordCount)'></word-cloud>
+              </div>
+
+          </div>
+        </div>
+      </ng-template>
+
+    </div>
+
+    <div class='divider'></div>
+
+  </div>
+</div>

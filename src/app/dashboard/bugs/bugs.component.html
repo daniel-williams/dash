@@ -1,0 +1,282 @@
+<div class="container-fluid pt20">
+  <section #clickTarget>
+
+    <header class='grid-heading'>
+      <!--<h1>Bug Counts</h1>-->
+    </header>
+
+    <div class='bug-tiles mb50'>
+
+      <table class='ms-Table bug-counts'>
+        <thead>
+          <tr>
+            <td>Bug type</td>
+            <td>Count</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="ms-CheckBox">
+                <label role="checkbox" class="ms-CheckBox-field" tabindex="0" aria-checked="true" name="checkboxc">
+                  <span class="ms-Label">RI Blocking</span>
+                </label>
+                <input tabindex="-1" type="checkbox" class="ms-CheckBox-input" (click)='toggleBugCategory($event, "riBlocking")'>
+              </div>
+            </td>
+            <td class='count'>
+              <div *ngIf='showRiBlocking'>
+                <div *ngIf='!bugMap'>
+                  <span>-</span>
+                </div>
+                <div *ngIf='!!bugMap && !bugMap.riBlockingIds.length'>
+                  <span><i class="ms-Icon bowtie-symbol-bug" style='color:rgb(204, 41, 61)'></i> 0</span>
+                </div>
+                <div *ngIf='!!bugMap && bugMap.riBlockingIds.length' class='bug-links'>
+                  <span><i class="ms-Icon bowtie-symbol-bug" style='color:rgb(204, 41, 61)'></i> {{bugMap.riBlockingIds.length}}</span>
+                </div>
+              </div>
+            </td>
+            <td class="count">
+              <div *ngIf='showRiBlocking'>
+                <div *ngIf='!!bugMap && bugMap.riBlockingIds.length' class='bug-links' class="bug-links">
+                  <span><a (click)="vpScroll('riBlocking-section')"><i class='ms-Icon bowtie-arrow-down'></i></a></span>
+                </div>
+              </div>
+            </td>
+            <td class="count">
+              <div *ngIf='showRiBlocking'>
+                <div *ngIf='!!bugMap && bugMap.riBlockingIds.length' class='bug-links' class="bug-links">
+                  <span><a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{bugMap.riBlockingIds.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'><i class='ms-Icon bowtie-link'></i> (vso)</a></span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ms-CheckBox">
+                <label role="checkbox" class="ms-CheckBox-field" tabindex="0" aria-checked="true" name="checkboxc">
+                  <span class="ms-Label" [class.disabled]='showServicing'>Servicing</span> 
+                </label>
+                <input tabindex="-1" type="checkbox" class="ms-CheckBox-input" (click)='toggleBugCategory($event, "servicing")'>
+              </div>
+            </td>
+            <td class='count'>
+              <div *ngIf='showServicing'>
+                <div *ngIf='!bugMap'>
+                  <span>-</span>
+                </div>
+                <div *ngIf='!!bugMap && !bugMap.servicingIds.length'>
+                  <span><i class="ms-Icon bowtie-symbol-bug" style='color:rgb(204, 41, 61)'></i> 0</span>
+                </div>
+                <div *ngIf='!!bugMap && bugMap.servicingIds.length' class='bug-links'>
+                  <span><i class="ms-Icon bowtie-symbol-bug" style='color:rgb(204, 41, 61)'></i> {{bugMap.servicingIds.length}}</span>
+                </div>
+              </div>
+            </td>
+            <td class="count">
+              <div *ngIf='showServicing'>
+                <div *ngIf='!!bugMap && bugMap.servicingIds.length' class='bug-links' class="bug-links">
+                  <span><a (click)="vpScroll('servicing-section')"><i class='ms-Icon bowtie-arrow-down'></i></a></span>
+                </div>
+              </div>
+            </td>
+            <td class="count">
+              <div *ngIf='showServicing'>
+                <div *ngIf='!!bugMap && bugMap.servicingIds.length' class='bug-links' class="bug-links">
+                  <span><a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{bugMap.servicingIds.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'><i class='ms-Icon bowtie-link'></i> (vso)</a></span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ms-CheckBox">
+                <label role="checkbox" class="ms-CheckBox-field" tabindex="0" aria-checked="true" name="checkboxc">
+                  <span class="ms-Label">Edge Crit</span> 
+                </label>
+                <input tabindex="-1" type="checkbox" class="ms-CheckBox-input" (click)='toggleBugCategory($event, "edgeCrit")'>
+              </div>
+            </td>
+            <td class='count'>
+              <div *ngIf='showEdgeCrit'>
+                <div *ngIf='!bugMap'>
+                  <span>-</span>
+                </div>
+                <div *ngIf='!!bugMap && !bugMap.edgeCritIds.length'>
+                  <span><i class="ms-Icon bowtie-symbol-bug" style='color:rgb(204, 41, 61)'></i> 0</span>
+                </div>
+                <div *ngIf='!!bugMap && bugMap.edgeCritIds.length' class='bug-links'>
+                  <span><i class="ms-Icon bowtie-symbol-bug" style='color:rgb(204, 41, 61)'></i> {{bugMap.edgeCritIds.length}}</span>
+                </div>
+              </div>
+            </td>
+            <td class="count">
+              <div *ngIf='showEdgeCrit'>
+                <div *ngIf='!!bugMap && bugMap.edgeCritIds.length' class='bug-links' class="bug-links">
+                  <span><a (click)="vpScroll('edgeCrit-section')"><i class='ms-Icon bowtie-arrow-down'></i></a></span>
+                </div>
+              </div>
+            </td>
+            <td class="count">
+              <div *ngIf='showEdgeCrit'>
+                <div *ngIf='!!bugMap && bugMap.edgeCritIds.length' class='bug-links' class="bug-links">
+                  <span><a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{bugMap.edgeCritIds.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'><i class='ms-Icon bowtie-link'></i> (vso)</a></span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ms-CheckBox">
+                <label role="checkbox" class="ms-CheckBox-field" tabindex="0" aria-checked="true" name="checkboxc">
+                  <span class="ms-Label">Hot</span>
+                </label>
+                <input tabindex="-1" type="checkbox" class="ms-CheckBox-input" (click)='toggleBugCategory($event, "hot")'>
+              </div>
+            </td>
+            <td class='count'>
+              <div *ngIf='showHot'>
+                <div *ngIf='!bugMap'>
+                  <span>-</span>
+                </div>
+                <div *ngIf='!!bugMap && !bugMap.hotIds.length'>
+                  <span><i class="ms-Icon bowtie-symbol-bug" style='color:rgb(204, 41, 61)'></i> 0</span>
+                </div>
+                <div *ngIf='!!bugMap && bugMap.hotIds.length' class='bug-links'>
+                  <span><i class="ms-Icon bowtie-symbol-bug" style='color:rgb(204, 41, 61)'></i> {{bugMap.hotIds.length}}</span>
+                </div>
+              </div>
+            </td>
+            <td class="count">
+              <div *ngIf='showHot'>
+                <div *ngIf='!!bugMap && bugMap.hotIds.length' class='bug-links' class="bug-links">
+                  <span><a (click)="vpScroll('hot-section')"><i class='ms-Icon bowtie-arrow-down'></i></a></span>
+                </div>
+              </div>
+            </td>
+            <td class="count">
+              <div *ngIf='showHot'>
+                <div *ngIf='!!bugMap && bugMap.hotIds.length' class='bug-links' class="bug-links">
+                  <span><a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{bugMap.hotIds.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'><i class='ms-Icon bowtie-link'></i> (vso)</a></span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ms-CheckBox">
+                <label role="checkbox" class="ms-CheckBox-field" tabindex="0" aria-checked="true" name="checkboxc">
+                  <span class="ms-Label">Blocking ENG Signoff</span> 
+                </label>
+                <input tabindex="-1" type="checkbox" class="ms-CheckBox-input" (click)='toggleBugCategory($event, "blockingEngineeringSignoff")'>
+              </div>
+            </td>
+            <td class='count'>
+              <div *ngIf='showBlockingEngineeringSignoff'>
+                <div *ngIf='!bugMap'>
+                  <span>-</span>
+                </div>
+                <div *ngIf='!!bugMap && !bugMap.blockingEngineeringSignoffIds.length'>
+                  <span><i class="ms-Icon bowtie-symbol-bug" style='color:rgb(204, 41, 61)'></i> 0</span>
+                </div>
+                <div *ngIf='!!bugMap && bugMap.blockingEngineeringSignoffIds.length' class='bug-links'>
+                  <span><i class="ms-Icon bowtie-symbol-bug" style='color:rgb(204, 41, 61)'></i> {{bugMap.blockingEngineeringSignoffIds.length}}</span>
+                </div>
+              </div>
+            </td>
+            <td class="count">
+              <div *ngIf='showBlockingEngineeringSignoff'>
+                <div *ngIf='!!bugMap && bugMap.blockingEngineeringSignoffIds.length' class='bug-links' class="bug-links">
+                  <span><a (click)="vpScroll('blockingEngineeringSignoff-section')"><i class='ms-Icon bowtie-arrow-down'></i></a></span>
+                </div>
+              </div>
+            </td>
+            <td class="count">
+              <div *ngIf='showBlockingEngineeringSignoff'>
+                <div *ngIf='!!bugMap && bugMap.blockingEngineeringSignoffIds.length' class='bug-links' class="bug-links">
+                  <span><a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{bugMap.blockingEngineeringSignoffIds.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'><i class='ms-Icon bowtie-link'></i> (vso)</a></span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </section>
+
+
+<section id='riBlocking-section' class='bug-section' [class.collapsed]='!showRiBlocking'>
+  <header class='grid-heading'>
+    <h1>RI Blocking Bugs <span><a (click)='scrollTo("top")'><i class='ms-Icon bowtie-arrow-up clickable'></i></a></span></h1>
+  </header>
+
+  <saga-grid class='bug-grid' #riBlockingGrid
+    [data]='riBlockingData'
+    [schema]='gridSchema'
+    [title]='tableTitle'
+    [pinPrefix]='"riBlocking"'></saga-grid>
+
+  <div class='section-bottom-pad'></div>
+</section>
+
+<section id='servicing-section' class='bug-section' [class.collapsed]='!showServicing'>
+  <header class='grid-heading'>
+    <h1>Servicing Bugs <span><a (click)='scrollTo("top")'><i class='ms-Icon bowtie-arrow-up clickable'></i></a></span></h1>
+  </header>
+
+    <saga-grid class='bug-grid' #servicingGrid
+      [data]='servicingData'
+      [schema]='gridSchema'
+      [title]='tableTitle'
+      [pinPrefix]='"servicing"'></saga-grid>
+
+    <div class='section-bottom-pad'></div>
+  </section>
+
+<section id='edgeCrit-section' class='bug-section' [class.collapsed]='!showEdgeCrit'>
+  <header class='grid-heading'>
+    <h1>Edge Crit Bugs <span><a (click)='scrollTo("top")'><i class='ms-Icon bowtie-arrow-up clickable'></i></a></span></h1>
+  </header>
+
+    <saga-grid class='bug-grid' #edgeCritGrid
+      [data]='edgeCritData'
+      [schema]='gridSchema'
+      [title]='tableTitle'
+      [pinPrefix]='"edgeCrit"'></saga-grid>
+
+    <div class='section-bottom-pad'></div>
+  </section>
+
+<section id='hot-section' class='bug-section' [class.collapsed]='!showHot'>
+  <header class='grid-heading'>
+    <h1>Hot Bugs <span><a (click)='scrollTo("top")'><i class='ms-Icon bowtie-arrow-up clickable'></i></a></span></h1>
+  </header>
+
+    <saga-grid class='bug-grid' #hotBugsGrid
+      [data]='hotData'
+      [schema]='gridSchema'
+      [title]='tableTitle'
+      [pinPrefix]='"hot"'></saga-grid>
+
+    <div class='section-bottom-pad'></div>
+  </section>
+
+<section id='blockingEngineeringSignoff-section' class='bug-section' [class.collapsed]='!showBlockingEngineeringSignoff'>
+  <header class='grid-heading'>
+    <h1>Blocking Engineering Signoff Bugs <span><a (click)='scrollTo("top")'><i class='ms-Icon bowtie-arrow-up clickable'></i></a></span></h1>
+  </header>
+
+    <saga-grid class='bug-grid' #blockingEngineeringSignoffGrid
+      [data]='blockingEngineeringSignoffData'
+      [schema]='gridSchema'
+      [title]='tableTitle'
+      [pinPrefix]='"blockingEngineeringSignoff"'></saga-grid>
+
+    <div class='section-bottom-pad'></div>
+  </section>
+</div>

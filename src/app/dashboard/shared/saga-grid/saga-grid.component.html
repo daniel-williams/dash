@@ -1,0 +1,230 @@
+<div class='saga-grid-new'>
+
+  <div class='sticky-header' [ngClass]='triggerName'>
+    <div [ngClass]='targetName'>
+      <div class='tbl-wrap'>
+
+        <div class='grid-controls'>
+          <div class='grid-controls-flex'>
+            <div
+              class='options-wrap'
+              (mouseleave)='hideColumnOptions($event)'>
+              <div
+                *ngIf='showOptionsPanel'
+                class='options-panel'
+                (click)='hideColumnOptions($event)'>
+                <ul class='columns'>
+                  <li
+                    *ngFor='let item of schema.collapsibleColumnSchemas'
+                    [class.active]='item.visible'
+                    (click)='setColumnVisibility(item.key, $event)'>{{item.title}}</li>
+                </ul>
+              </div>
+              <div>
+                <i
+                  class='toggle-icon fa fa-cog'
+                  title='options'
+                  (click)='toggleColumnOptions($event)'></i></div>
+            </div>
+
+            <div class='copy-data clickable' *ngIf='gridData.length > 0'>
+              <i
+                class='fa fa-files-o'
+                title='copy to clipboard'
+                (click)='copyToClipboard("grid-data")'></i>
+            </div>
+
+            <div class='clickable' *ngIf='gridData.length > 0'>
+              <a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{workitemIds.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'><i class='bowtie-link'></i></a>
+            </div>
+            
+            <div *ngIf='gridData.length > 0'
+              class='table-title'
+              title='search criteria'>{{title}}</div>
+          </div>
+        </div>
+
+        <table *ngIf='schema.count'>
+          <thead>
+            <tr class='headings'>
+              <td
+                *ngFor='let cs of schema.visibleColumnSchemas'
+                class='{{cs.headerClass}}'
+                (click)='addSort(cs, $event)'>
+                <div class='header'>
+                  <div>{{cs.title}}</div>
+                  <sort-indicator
+                    [sortOrder]='cs.sortOrder'
+                    [sortAsc]='cs.sortAsc'></sort-indicator>
+                </div>
+              </td>
+            </tr>
+          </thead>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+  <div id='grid-data' class="grid-data" [ngClass]='pinPrefix'>
+    <table>
+      <thead>
+        <tr class='controls'>
+          <td [attr.colspan]='schema.visibleColumnCount'>
+
+            <div
+              class='table-title'
+              title='search criteria'>&nbsp;</div>
+
+          </td>
+        </tr>
+        <tr class='headings'>
+          <td
+            *ngFor='let cs of schema.visibleColumnSchemas'
+            class='{{cs.headerClass}}'>
+            <div class='header'>
+              <div>{{cs.title}}</div>
+              <div class='sort-spacer'></div>
+            </div>
+          </td>
+        </tr>
+      </thead>
+      <tbody *ngFor='let row of pagedGridData'>
+        <tr>
+          <td class='{{cs.bodyClass}}'
+              *ngFor='let cs of schema.visibleColumnSchemas'
+              (dblclick)='setEditMode(row, cs)'>
+            <div [ngSwitch]='row.editMode'>
+              <editor
+                *ngSwitchCase='cs.key'
+                [schema]='cs'
+                [data]='row'
+                (cancel)='onCancel(row)'
+                (save)='onSave(row, cs.key, $event)'></editor>
+              <presenter
+                *ngSwitchDefault
+                [schema]='cs'
+                [data]='row'></presenter>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf='showTotals && gridData.length > 0'>
+        <tr>
+          <td class='totals'
+              *ngFor='let cs of schema.visibleColumnSchemas'>
+              <div *ngIf='!isLink(cs)'>{{getTotals(cs)}}</div>
+              <div *ngIf='isLink(cs)'>
+                <a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT%20[System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags]%20FROM%20WorkItems%20WHERE%20[System.Id]%20IN%20({{getIds(cs)}})%20order%20by%20[Microsoft.VSTS.Common.Priority]%20asc' target='_blank'>{{getTotals(cs)}}</a>
+              </div>
+            </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf='gridData.length === 0'>
+        <tr>
+          <td [attr.colspan]='schema.visibleColumnCount'>no items found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+<style>
+.saga-grid-new {
+  position: relative;
+}
+.saga-grid-new table {
+  border-collapse: unset;
+}
+.saga-grid-new table td {
+  position: relative;
+}
+.saga-grid-new table thead tr td {
+  padding: 5px 15px 15px;
+
+  font-size: 16px;
+  font-size: 1.6rem;
+  line-height: 1;
+
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.saga-grid-new table thead tr td.gray {
+  border-top: 10px solid #b1b4ba;
+
+  background-color: white;
+}
+.saga-grid-new table thead tr td.blue {
+  border-top: 10px solid #5b79c0;
+
+  background-color: white;
+}
+.saga-grid-new table thead tr td .header {
+  position: relative;
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+}
+.saga-grid-new table tbody tr:not(.bottom-cap):hover {
+  background-color: #f6f6f6;
+}
+.saga-grid-new table tbody tr td {
+  padding: 5px 15px;
+  border-bottom: 1px solid #aaaaaa;
+
+  font-size: 14px;
+  font-size: 1.4rem;
+  line-height: 1;
+
+  text-align: left;
+  vertical-align: top;
+}
+.saga-grid-new table tbody tr td.totals {
+  text-align: center;
+  border-bottom-color: transparent;
+}
+.saga-grid-new table tbody tr td.calc {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.saga-grid-new table tbody tr td select {
+  margin: 0;
+  padding: 0;
+  height: 30px;
+
+  font-size: 14px;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.saga-grid-new table tbody tr.bottom-cap td {
+  padding: 0;
+}
+
+.saga-grid-new .grid-data .headings .header {
+  color: transparent !important;
+}
+.saga-grid-new .grid-data div.sort-spacer {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+
+  margin-right: -12;
+  width: 12px;
+  height: 20px;
+}
+
+.saga-grid-new .sticky-header {
+  position: absolute;
+  top: 0;
+
+  z-index: 10;
+}
+
+
+</style>

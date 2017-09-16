@@ -1,0 +1,4 @@
+<div [ngStyle]='cellStyle'>
+  <span *ngIf='!grade.isCoreReadiness'>{{grade.gradeText}}%</span>
+  <span *ngIf='grade.isCoreReadiness'>{{grade.gradeText}}</span>
+</div>

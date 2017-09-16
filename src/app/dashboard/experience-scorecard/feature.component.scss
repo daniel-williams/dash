@@ -1,0 +1,53 @@
+table.ur-table {
+  width: auto;
+
+  thead th, tbody td {
+    padding: 10px 5px !important;
+    border-bottom: 1px solid #999999;
+
+    text-align: left;
+    vertical-align: top;
+  }
+  thead th {
+    font-size: 20px;
+
+    &.clickable {
+      cursor: pointer;
+    }
+  }
+  tbody tr {
+    &:nth-child(odd) {
+      background-color: #eeeeee;
+    }
+
+    &:nth-child(even) {
+      background-color: #dddddd;
+    }
+  }
+  tbody td {
+    font-size: 16px;
+  }
+
+  .username {
+    > span {
+      white-space: nowrap;
+      cursor: pointer;
+    }
+  }
+}
+.demographic-data {
+  & > div {
+    padding: 6px 10px;
+  }
+  & > div:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  & > div:nth-child(even) {
+    background-color: #eeeeee;
+  }
+}
+
+.ms-Callout {
+  width: auto !important;
+  max-width: 400px;
+}

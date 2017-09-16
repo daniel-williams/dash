@@ -1,0 +1,257 @@
+:host {
+  margin-bottom: 50px;
+  margin-left: 20px;
+  max-width: 1000px;
+
+  flex-grow: 1;
+  box-shadow: 0 0 1px 0 rgba(51,51,51,1);
+
+  &:nth-child(1) > .header {
+    background-color: #0078d7;
+  }
+  &:nth-child(2) > .header {
+    background-color: #ffb900;
+  }
+  &:first-child {
+    margin-left: 0;
+  }
+  .header {
+    padding: 20px;
+    height: 225px;
+
+    color: white;
+
+    .browser-title, .browser-score {
+      font-size: 60px; font-size: 6.0rem;
+      font-weight: bold;
+      line-height: 1.25;
+    }
+    .browser-participants {
+      margin-top: 20px;
+
+      font-size: 16px; font-size: 1.6rem;
+      line-height: 1;
+
+      text-align: right;
+    }
+  }
+  .content-wrap {
+    padding: 20px 0;
+
+    background-color: white;
+  }
+  .experience-wrap {
+    padding-bottom: 25px;
+
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: 1px solid transparent;
+    }
+    .experience-header-wrap {
+      padding: 0 20px;
+
+      .experience-header {
+        display: flex;
+
+        padding-top: 15px;
+
+        justify-content: flex-start;
+
+        .experience-title {
+          font-size: 36px; font-size: 3.6rem;
+          font-weight: bold;
+          line-height: 36px; line-height: 3.6rem;
+          // color: #0078d7;
+
+          flex-grow: 1;
+          flex-shrink: 1;
+        }
+        .experience-score {
+          font-size: 30px; font-size: 3.0rem;
+          font-weight: bold;
+          line-height: 30px; line-height: 3.0rem;
+          // color: #0078d7;
+
+          flex-grow: 2;
+          flex-shrink: 1;
+          text-align: right;
+
+          .score-wrap {
+            display: inline-block;
+
+            padding: 3px;
+          }
+
+          &.orange > div.score-wrap {
+            color: orange;
+          }
+          &.red > div.score-wrap {
+            color: #c50f1f;
+          }
+        }
+      }
+      .experience-description {
+        margin-top: 5px;
+        margin-bottom: 20px;
+
+        &.camo {
+          color: transparent;
+        }
+      }
+    }
+    .feature-wrap {
+      margin: 0 10px;
+      padding: 10px 10px;
+
+      &:nth-child(even) {
+        background-color: #f7f7f7;
+      }
+      .feature-row {
+        display: flex;
+
+        justify-content: flex-start;
+
+        .feature-title {
+          font-size: 20px; font-size: 2.0rem;
+          line-height: 30px; line-height: 3.0rem;
+
+          flex-grow: 1;
+          flex-shrink: 100;
+
+          a {
+            color: #0078d7 !important;
+
+            &:hover, &:focus, &:active {
+              color: lighten(#0078d7, 10%) !important;
+            }
+          }
+        }
+        .feature-score {
+          margin-left: 20px;
+
+          font-size: 20px; font-size: 2.0rem;
+          line-height: 30px; line-height: 3.0rem;
+
+          flex-grow: 100;
+          flex-shrink: 1;
+
+          .score-wrap {
+            display: inline-block;
+
+            padding: 3px;
+          }
+
+          &.orange > div.score-wrap {
+            color: orange;
+          }
+          &.red > div.score-wrap {
+            color: #c50f1f;
+          }
+        }
+      }
+      .feature-description {
+        margin-top: 5px;
+        margin-bottom: 10px;
+      }
+    }
+    .dimension-wrap {
+      display: flex;
+
+      margin-bottom: 10px;
+
+      justify-content: space-between;
+      flex-grow: 5;
+      flex-shrink: 1;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &.appearance {
+        display: block;
+        > .dimension-cell {
+          display: inline-block;
+
+          width: 50%;
+        }
+      }
+      > .dimension-cell {
+        padding: 0 0 5px;
+        max-width: 300px;
+
+        flex-grow: 2;
+
+        .dimension-title {
+          padding: 0 5px;
+          border-bottom: 1px solid #cccccc;
+
+          font-size: 16px; font-size: 1.6rem;
+          line-height: 30px; line-height: 3.0rem;
+
+          text-align: center;
+
+          .sentiment {
+            font-size: 12px; font-size: 1.2rem;
+            line-height: 1;
+
+            vertical-align: 30%;
+          }
+        }
+        .dimension-score, .dimension-wordCloud {
+          margin: 0 auto;
+
+          font-size: 20px; font-size: 2.0rem;
+          line-height: 30px; line-height: 3.0rem;
+
+          text-align: center;
+        }
+        .dimension-score {
+          .score-wrap {
+            display: inline-block;
+
+            padding: 3px;
+          }
+
+          &.orange > div.score-wrap {
+            color: orange;
+          }
+          &.red > div.score-wrap {
+            color: #c50f1f;
+          }
+        }
+      }
+    }
+
+    .divider {
+      margin: 25px 10px;
+      border-bottom: 2px solid #0078d7;
+      height: 0;
+    }
+    &:last-child {
+      .divider {
+        margin: 0;
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 1100px) {
+  :host {
+    position: relative;
+    display: block;
+
+    margin-left: 0;
+    max-width: 2000px;
+  }
+}
+
+.insight {
+  margin-bottom: 15px;
+
+  color: firebrick;
+
+  &.camo {
+    color: transparent;
+  }
+}

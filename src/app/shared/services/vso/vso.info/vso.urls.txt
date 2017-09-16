@@ -1,0 +1,12 @@
+
+# workitem-link-types
+https://microsoft.visualstudio.com/DefaultCollection/_apis/wit/workitemrelationtypes?api-version=1.0
+
+# field-types
+https://microsoft.visualstudio.com/DefaultCollection/_apis/wit/fields?api-version=1.0
+
+
+
+
+
+

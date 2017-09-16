@@ -1,0 +1,10 @@
+<select
+  [ngModel]='selectedOption'
+  (ngModelChange)='onChange($event)'
+  [disabled]='disabled'
+  [class.disabled]='disabled'>
+  <option value=''></option>
+  <option
+    *ngFor='let option of options'
+    [ngValue]='option'>{{option.display}}</option>
+</select>

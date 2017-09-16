@@ -1,0 +1,109 @@
+<h2>{{feature}}</h2>
+<div style='font-size:24px;font-weight:normal'>{{experience}} on {{browser}}</div>
+
+<div style='margin-top: 10px;margin-bottom: 30px;'>
+  <button class='ms-Button ms-Button--primary' (click)='back()' style='color:white'>Back to overview</button>
+</div>
+
+<table class='ms-Table ur-table' style='margin: 30px 0;'>
+  <thead
+     *ngIf='experience !== "Appearance"'
+     class='ms-Table-head'>
+    <tr>
+      <th class='clickable' (click)='sortBy("username")'>Username</th>
+      <th class='clickable' (click)='sortBy("average")'>Average Score</th>
+      <th class='clickable' (click)='sortBy("useful")'>Useful</th>
+      <th class='clickable' (click)='sortBy("usable")'>Usable</th>
+      <th class='clickable' (click)='sortBy("findable")'>Findable</th>
+      <th class='clickable' (click)='sortBy("predictable")'>Predictable</th>
+      <th class='clickable' (click)='sortBy("desirable")'>Desirable</th>
+      <th class='clickable' (click)='sortBy("feedback")'>Feedback</th>
+      <th class='clickable' (click)='sortBy("video")'>Video</th>
+    </tr>
+  </thead>
+  <thead
+    *ngIf='experience === "Appearance"'
+    class='ms-Table-head'>
+    <tr>
+      <th class='clickable' (click)='sortBy("username")'>Username</th>
+      <th>App Icon</th>
+      <th>Overflow Menu</th>
+      <th>Buttons</th>
+      <th>Layout</th>
+      <th>Feedback</th>
+    </tr>
+  </thead>
+  <tbody
+    *ngIf='experience !== "Appearance"'>
+    <tr class='ms-Table-row' *ngFor='let response of sortedResponses$ | async'>
+      <td>
+        <div class="ms-CalloutExample">
+          <div class="ms-Callout ms-Callout--OOBE is-hidden">
+            <div class="ms-Callout-main">
+              <div class="ms-Callout-header">
+                <p class="ms-Callout-title">About {{response.username}}</p>
+              </div>
+              <div class="ms-Callout-inner">
+                <div class="ms-Callout-content">
+                  <div *ngIf='!demographics'>Demographic information here?</div>
+                  <div *ngIf='!!demographics'>
+                    <div class='demographic-data'>
+                      <div *ngFor='let item of demographics'>{{item}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="username">
+            <span (click)='getDemographics(response.username)'><i class='bowtie-user'></i> {{response.username}}</span>
+          </div>
+        </div>
+      </td>
+      <td>{{response.averageScore}}</td>
+      <td>{{response.dimensions.Useful}}</td>
+      <td>{{response.dimensions.Usable}}</td>
+      <td>{{response.dimensions.Findable}}</td>
+      <td>{{response.dimensions.Predictable}}</td>
+      <td style='width:150px;'>{{response.dimensions.Desirable}}</td>
+      <td style='width:400px;'>{{response.dimensions.Feedback}}</td>
+      <td>
+        <exp-video src={{response.videoUrl}} start={{response.videoOffset}} duration={{response.videoDuration}} poster='/content/videos/exp-scorecard/poster.png'></exp-video>
+      </td>
+    </tr>
+  </tbody>
+  <tbody
+    *ngIf='experience === "Appearance"'>
+    <tr class='ms-Table-row' *ngFor='let response of sortedResponses$ | async'>
+      <td>
+        <div class="ms-CalloutExample">
+          <div class="ms-Callout ms-Callout--OOBE is-hidden">
+            <div class="ms-Callout-main">
+              <div class="ms-Callout-header">
+                <p class="ms-Callout-title">About {{response.username}}</p>
+              </div>
+              <div class="ms-Callout-inner">
+                <div class="ms-Callout-content">
+                  <div *ngIf='!demographics'>Demographic information here?</div>
+                  <div *ngIf='!!demographics'>
+                    <div class='demographic-data'>
+                      <div *ngFor='let item of demographics'>{{item}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="username">
+            <span (click)='getDemographics(response.username)'><i class='bowtie-user'></i> {{response.username}}</span>
+          </div>
+        </div>
+      </td>
+      <td style='width:200px'>{{response.dimensions['App Icon']}}</td>
+      <td style='width:200px'>{{response.dimensions['Overflow Menu']}}</td>
+      <td style='width:200px'>{{response.dimensions['Buttons']}}</td>
+      <td style='width:200px'>{{response.dimensions['Layout']}}</td>
+      <td style='width:400px'>{{response.dimensions.Feedback}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,5 @@
+<div *ngIf='!!order' class='sort-indicator'>
+  <div class='desc'><i *ngIf='!asc' class='fa fa-chevron-up'></i></div>
+  <div class='order'>{{order}}</div>
+  <div class='asc'><i *ngIf='asc' class='fa fa-chevron-down'></i></div>
+</div>

@@ -1,0 +1,26 @@
+<div class="planning-nav">
+  <ul>
+    <li>
+      <a tabindex="1" routerLink='./scenarios' routerLinkActive='active'><i class="bowtie-symbol-crown" style='color:rgb(119, 59, 147)'></i> Scenarios</a>
+    </li>
+    <li>
+      <a tabindex="1" routerLink='./deliverables' routerLinkActive='active'><i class="bowtie-symbol-trophy" style='color: rgb(0, 94, 255)'></i>Deliverables</a>
+    </li>
+    <li>
+      <a tabindex="1" routerLink='./measures' routerLinkActive='active'><i class="bowtie-symbol-finance" style='color: rgb(0, 156, 204)'></i>Measures</a>
+    </li>
+    <li>
+      <a tabindex="1" routerLink='./bugs' routerLinkActive='active'><i class="bowtie-symbol-bug" style='color:rgb(204, 41, 61)'></i>Bugs</a>
+    </li>
+    <li>
+      <a tabindex="1" routerLink='./scenario-readiness' routerLinkActive='active'><i class="bowtie-symbol-crown" style='color:rgb(119, 59, 147)'></i>Scenario Readiness</a>
+    </li>
+    <li>
+      <a tabindex="1" routerLink='./experience-scorecard' routerLinkActive='active'><i class="bowtie-star-half" style='color:#ee4535'></i>Experience Scorecard</a>
+    </li>
+    <li *ngIf='!appConstants.isProduction' class='delimiter'>|</li>
+    <li *ngIf='!appConstants.isProduction'>
+      <a tabindex="1" routerLink='./rca-trends' routerLinkActive='active'><i class="bowtie-chart-column" style='color:rgb(204, 41, 61)'></i>RCA Trends</a>
+    </li>
+  </ul>
+</div>

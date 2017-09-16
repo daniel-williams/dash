@@ -1,0 +1,22 @@
+<div [ngSwitch]='schema.editor'>
+
+  <text-area-editor #textAreaEditor
+    *ngSwitchCase='EditorType.TextArea'
+    [data]='getData'
+    (save)='onSave($event)'
+    (cancel)='onCancel($event)'></text-area-editor>
+
+  <text-box-editor #textBoxEditor
+    *ngSwitchCase='EditorType.TextBox'
+    [data]='getData'
+    (save)='onSave($event)'
+    (cancel)='onCancel($event)'></text-box-editor>
+
+  <select-option-editor #selectOptionEditor
+    *ngSwitchCase='EditorType.Option'
+    [data]='getData'
+    [key]='schema.key'
+    (save)='onSave($event)'
+    (cancel)='onCancel($event)'></select-option-editor>
+
+</div>

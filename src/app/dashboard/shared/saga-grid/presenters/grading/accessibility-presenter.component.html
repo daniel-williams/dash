@@ -1,0 +1,8 @@
+<div [ngStyle]='cellStyle'>
+  <span *ngIf='!grade.isCoreReadiness && !grade.exempt && grade.redAndYellow.length'>
+    <a *ngIf='grade.red.length' href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{grade.red.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'>Red({{grade.red.length}})</a>
+    <a *ngIf='grade.yellow.length' href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{grade.yellow.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'>Yellow({{grade.yellow.length}})</a>
+  </span>
+  <span *ngIf='!grade.isCoreReadiness && !grade.exempt && grade.lime.length'><a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{grade.lime.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'>Lime({{grade.lime.length}})</a></span>
+  <span *ngIf='grade.isCoreReadiness || (grade.redAndYellow.length === 0 && grade.lime.length === 0)'>{{grade.gradeText}}</span>
+</div>

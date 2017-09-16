@@ -1,0 +1,104 @@
+<div class="container-fluid pt20">
+  <section class='page'>
+
+    <div class='container-fluid' style='margin-top:20px;'>
+      <div class='row mb25'>
+        <div class='col-md-3' style='padding-top:20px;'>
+          <div style='margin:20px 0;'>
+            <label>Time scale</label>
+            <select (change)='onScaleChange($event.target.value)' class='form-control'>
+              <option value='daily' [selected]='scale === "daily"'>Daily</option>
+              <option value='monthly' [selected]='scale === "monthly"'>Monthly</option>
+              <option value='quarterly' [selected]='scale === "quarterly"'>Quarterly</option>
+            </select>
+          </div>
+          <div style='margin: 20px 0'>
+            <label>Dateset</label>
+            <select (change)='onDatasetChange($event.target.value)' class='form-control'>
+              <option value='vso' [selected]='dataset === "vso"'>VSO</option>
+              <option value='mocked' [selected]='dataset === "mocked"'>Mocked</option>
+            </select>
+          </div>
+        </div>
+        <div class='col-md-9'>
+
+          <div class='chart-layout'>
+            <div class='chart-sizer'>
+              <canvas id='rca-chart' #rcaChart></canvas>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <div id='debug'></div>
+        </div>
+        <div [hidden]='!showMockPanel' class="col-sm-6">
+
+
+            <div class='container-fluid'>
+              <div class='row' style='margin-bottom: 10px;'>
+                <div class='col-sm-3'>
+                  <label for='startDate'>Start</label>
+                  <input
+                    #startDate
+                    [(ngModel)]='mockDataDM.startDateString'
+                    type='date'
+                    name='startDate'
+                    class='form-control' />
+                </div>
+              </div>
+              <div class='row' style='margin-bottom: 10px;'>
+                <div class='col-sm-3'>
+                  <label for='detected'>Detected</label>
+                  <input
+                    #detectedDate
+                    [(ngModel)]='mockDataDM.detectedDate'
+                    type='date'
+                    name='detectedDate'
+                    class='form-control' />
+                </div>
+              </div>
+              <div class='row' style='margin-bottom: 10px;'>
+                <div class='col-sm-3'>
+                  <label for='resolved'>Resolved</label>
+                  <input
+                    #resolvedDate
+                    [(ngModel)]='mockDataDM.resolvedDate'
+                    type='date'
+                    name='resolvedDate'
+                    class='form-control' />
+                </div>
+              </div>
+              <div class='row' style='margin-bottom: 10px;'>
+                <div class='col-sm-3'>
+                  <label for='finish'>Finish</label>
+                  <input
+                    #finishDate
+                    [(ngModel)]='mockDataDM.finishDate'
+                    type='date'
+                    name='finishDate'
+                    class='form-control' />
+                </div>
+              </div>
+
+              <div class='row' style='padding-top: 10px;'>
+                <div class='col-xs-12'>
+                  <button type='button' class='btn btn-default' (click)='addMockData($event)'>Add data</button>
+                  <button type='button' class='btn btn-secondary' style='margin-left: 20px;' (click)='resetMockData($event)'>clear data</button>
+                </div>
+              </div>
+            </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+</div>

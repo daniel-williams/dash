@@ -1,0 +1,11 @@
+<div>
+  <select
+    #selectElementRef
+    [value]='selectedOption'
+    (change)='saveValue($event.target.value)'
+    (blur)='triggerCancel()'
+    class='form-control'>
+    <option value=''></option>
+    <option *ngFor='let opt of options' value='{{opt}}'>{{opt}}</option>
+  </select>
+</div>
