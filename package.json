@@ -1,0 +1,69 @@
+{
+  "name": "sagadash",
+  "version": "1.0.0",
+  "author": {
+    "name": "Daniel James Williams",
+    "email": "v-wildan@microsoft.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "VSO:TBD"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --config config/webpack.dev.js --progress --profile --watch --content-base client/",
+    "start": "npm run dev",
+    "build:prod": "rimraf dist && webpack --config config/webpack.production.js --progress --profile --bail"
+  },
+  "keywords": [
+    "Angular",
+    "redux",
+    "webpack"
+  ],
+  "dependencies": {
+    "@angular-redux/router": "6.3.0",
+    "@angular-redux/store": "6.5.4",
+    "@angular/animations": "4.2.4",
+    "@angular/common": "4.2.4",
+    "@angular/compiler": "4.2.4",
+    "@angular/core": "4.2.4",
+    "@angular/forms": "4.2.4",
+    "@angular/http": "4.2.4",
+    "@angular/platform-browser": "4.2.4",
+    "@angular/platform-browser-dynamic": "4.2.4",
+    "@angular/platform-server": "4.2.4",
+    "@angular/router": "4.2.4",
+    "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
+    "core-js": "2.4.1",
+    "rxjs": "^5.4.3",
+    "zone.js": "0.8.12"
+  },
+  "devDependencies": {
+    "@types/core-js": "^0.9.43",
+    "@types/node": "^8.0.26",
+    "@types/redux": "3.6.31",
+    "@types/webpack": "^3.0.10",
+    "angular-router-loader": "^0.6.0",
+    "angular2-template-loader": "^0.6.2",
+    "autoprefixer": "^7.1.4",
+    "awesome-typescript-loader": "^3.2.3",
+    "bootstrap": "4.0.0-beta",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.30.1",
+    "imports-loader": "^0.7.1",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.6",
+    "raw-loader": "^0.5.1",
+    "redux": "3.6.0",
+    "rimraf": "^2.6.1",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "to-string-loader": "^1.1.5",
+    "typescript": "^2.5.2",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1",
+    "webpack-merge": "^4.1.0"
+  }
+}
