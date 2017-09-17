@@ -1,7 +1,15 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CoreService } from './core.service';
+// providers
+import {
+  AnimationService,
+  ClipboardService,
+  FabricService,
+  IdentityService,
+  SearchService,
+  VsoService,
+} from '../shared';
 
 @NgModule({
   imports: [
@@ -11,7 +19,12 @@ import { CoreService } from './core.service';
 
   ],
   providers: [
-    CoreService,
+    AnimationService,
+    ClipboardService,
+    FabricService,
+    IdentityService,
+    SearchService,
+    VsoService,
   ]
 })
 export class CoreModule {

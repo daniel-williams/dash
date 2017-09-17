@@ -11,10 +11,12 @@ import { NgReduxRouterModule, NgReduxRouter  } from '@angular-redux/router';
 // app mods
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core';
+import { SharedModule } from './shared';
 
 // app comps
 import { App } from './app.component';
-import { SiteNav } from './site-nav';
+import { PlanningNav } from './planning-nav.component';
+import { PlanningSearch } from './planning-search.component';
 
 import { AppConstants } from './app.constants';
 import { RouteLogger } from './shared/utils';
@@ -26,15 +28,6 @@ import {
   GlobalsActions,
   PlanningActions,
   SearchActions } from './store';
-
-// providers
-import {
-    AnimationService,
-    ClipboardService,
-    FabricService,
-    IdentityService,
-    VsoService,
-  } from './shared/services';
 
 const createLogger = require('redux-logger');
 
@@ -53,10 +46,12 @@ const createLogger = require('redux-logger');
 
     AppRoutingModule,
     CoreModule,
+    SharedModule,
   ],
   declarations: [
     App,
-    SiteNav,
+    PlanningNav,
+    PlanningSearch,
   ],
   providers: [
     AppConstants,
@@ -65,12 +60,6 @@ const createLogger = require('redux-logger');
     GlobalsActions,
     PlanningActions,
     SearchActions,
-
-    AnimationService,
-    ClipboardService,
-    FabricService,
-    IdentityService,
-    VsoService,
   ]
 })
 export class AppModule {

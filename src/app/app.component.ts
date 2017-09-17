@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation, } from '@angular/core';
 
 @Component({
   selector: 'app',
   template: `
-  <site-nav></site-nav>
+  <planning-nav></planning-nav>
   <router-outlet></router-outlet>
   `,
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./planning.base.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class App {}
+export class App { }

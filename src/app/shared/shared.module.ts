@@ -1,30 +1,41 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { MultiselectDropdownModule } from './multi-select-dropdown';
 import { PipesModule } from './pipes/pipes.module';
+import { SagaGridModule } from './saga-grid/saga-grid.module';
 
-// config validation
-import { SharedService } from './shared.service';
-import { SharedCompModule } from './shared-comp';
+import { FormsSelect } from './select';
+import { SagaSearch } from './search';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
 
+    MultiselectDropdownModule,
     PipesModule,
-    SharedCompModule,
+    SagaGridModule,
+  ],
+  declarations: [
+    FormsSelect,
+    SagaSearch,
   ],
   exports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
 
+    FormsSelect,
+    SagaSearch,
     PipesModule,
-    SharedCompModule,
+    MultiselectDropdownModule,
+    SagaGridModule,
   ],
   providers: [
-    SharedService,
   ]
 })
 export class SharedModule {}
