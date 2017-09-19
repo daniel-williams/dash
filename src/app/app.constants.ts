@@ -10,8 +10,6 @@ const env = {
   debug: 'debug',
 };
 
-console.log('App mode:', ENV);
-
 // Used in page titles
 let siteTitle = 'Studio SAGA';
 

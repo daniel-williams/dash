@@ -37,7 +37,7 @@
             <div class='clickable' *ngIf='gridData.length > 0'>
               <a href='https://microsoft.visualstudio.com/defaultcollection/OS/ft_edge/_workitems?_a=query&wiql=SELECT [System.Id],[Microsoft.VSTS.Common.Priority],[System.WorkitemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.Id] IN ({{workitemIds.join(",")}}) order by [Microsoft.VSTS.Common.Priority] asc' target='_blank'><i class='bowtie-link'></i></a>
             </div>
-            
+
             <div *ngIf='gridData.length > 0'
               class='table-title'
               title='search criteria'>{{title}}</div>
@@ -136,7 +136,7 @@
   position: relative;
 }
 .saga-grid-new table {
-  border-collapse: unset;
+  border-collapse: collapse;
 }
 .saga-grid-new table td {
   position: relative;

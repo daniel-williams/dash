@@ -46,7 +46,7 @@ module.exports = function (options) {
       'vendor': './src/vendor.ts',
       'app': './src/main.ts',
       'extractedStyles': [
-        'node_modules/bootstrap/dist/css/bootstrap.css',
+        'modules/bootstrap/dist/css/bootstrap.css',
         'styles/font-awesome.css',
         'styles/bowtie-icons.css',
         'styles/site.scss',
@@ -58,7 +58,8 @@ module.exports = function (options) {
         'ScrollMagicGSAP': 'scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap',
         'ScrollToPlugin': 'gsap/src/uncompressed/plugins/ScrollToPlugin',
         'EasePack': 'gsap/src/uncompressed/easing/EasePack',
-        node_modules: helpers.root('node_modules'),
+        modules: helpers.root('node_modules'),
+        scripts: helpers.root('client', 'assets', 'scripts'),
         styles: helpers.root('client', 'assets', 'styles'),
       }
     },

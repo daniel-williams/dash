@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ScenarioReadiness } from './';
+import { ScenarioReadiness } from './scenario-readiness.component';
 
 const routes: Routes = [
   {
