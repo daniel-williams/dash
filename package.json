@@ -1,5 +1,5 @@
 {
-  "name": "sagadash",
+  "name": "saga-planning",
   "version": "1.0.0",
   "author": {
     "name": "Daniel James Williams",
@@ -34,7 +34,6 @@
     "@angular/platform-browser-dynamic": "4.2.4",
     "@angular/platform-server": "4.2.4",
     "core-js": "2.4.1",
-    "cross-env": "^5.0.5",
     "rxjs": "^5.4.3",
     "zone.js": "0.8.12"
   },
@@ -56,6 +55,7 @@
     "bootstrap": "4.0.0-beta",
     "chart.js": "^2.7.0",
     "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
