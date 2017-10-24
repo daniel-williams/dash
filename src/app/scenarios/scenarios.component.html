@@ -23,7 +23,7 @@
         <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'state')">State</td>
         <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'release')">Release</td>
         <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'iteration')">Iteration</td>
-        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'remainingDays')">Remaining Days</td>
+        <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'remainingDevDays')">Remaining Days</td>
         <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'risk')">Risk</td>
         <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'riskComment')">Risk Comment</td>
         <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(sort, 'scenarioSpecStatus')">Scenario Spec</td>
@@ -47,7 +47,7 @@
         <td [ngStyle]='tblCellStyle' [style.background-color]='stateColor(scenario)'>{{scenario.state}}</td>
         <td [ngStyle]='tblCellStyle'>{{scenario.release}}</td>
         <td [ngStyle]='tblCellStyle'>{{scenario.iteration}}</td>
-        <td [ngStyle]='tblCellStyle'>{{scenario.remainingDays || ''}}</td>
+        <td [ngStyle]='tblCellStyle'>{{scenario.remainingDevDays || ''}}</td>
         <td [ngStyle]='tblCellStyle' [style.background-color]='riskColor(scenario)'>{{scenario.risk}}</td>
         <td [ngStyle]='tblCellStyle' title='{{scenario.riskComment}}'>{{scenario.riskComment | ellipsis : 100 : sizeRelative}}</td>
         <td [ngStyle]='tblCellStyle'>
@@ -117,7 +117,7 @@
           <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'availableDateString')">Available</td>
 
           <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'originalEstimate')">Original Estimate</td>
-          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'remainingDays')">Remaining Days</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'remainingDevDays')">Remaining Days</td>
           <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'risk')">Risk</td>
           <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'riskComment')">Risk Comment</td>
           <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.dsort, 'compliance')">Compliance</td>
@@ -140,7 +140,7 @@
           <td [ngStyle]='tblCellStyle'>{{deliverable.iteration}}</td>
           <td [ngStyle]='tblCellStyle'>{{deliverable.availableDateString}}</td>
           <td [ngStyle]='tblCellStyle'>{{deliverable.originalEstimate || ''}}</td>
-          <td [ngStyle]='tblCellStyle'>{{deliverable.remainingDays || ''}}</td>
+          <td [ngStyle]='tblCellStyle'>{{deliverable.remainingDevDays || ''}}</td>
           <td [ngStyle]='tblCellStyle' [style.background-color]='riskColor(deliverable)'>{{deliverable.risk}}</td>
           <td [ngStyle]='tblCellStyle'>{{deliverable.riskComment}}</td>
           <td [ngStyle]='tblCellStyle' [style.background-color]='complianceColor(deliverable)'>{{deliverable.compliance}}</td>
@@ -230,7 +230,7 @@
           <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'release')">Release</td>
           <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'iteration')">Iteration</td>
           <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'availableDateString')">Available</td>
-          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'remainingDays')">Remaining Days</td>
+          <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'remainingDevDays')">Remaining Days</td>
           <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'risk')">Risk</td>
           <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'riskComment')">Risk Comment</td>
           <td [ngStyle]='tblHeadStyle' class='clickable' (click)="setSort(scenario.psort, 'compliance')">Compliance</td>
@@ -252,7 +252,7 @@
           <td [ngStyle]='tblCellStyle'>{{consumingFrom.release}}</td>
           <td [ngStyle]='tblCellStyle'>{{consumingFrom.iteration}}</td>
           <td [ngStyle]='tblCellStyle'>{{consumingFrom.availableDateString}}</td>
-          <td [ngStyle]='tblCellStyle'>{{consumingFrom.remainingDays || ''}}</td>
+          <td [ngStyle]='tblCellStyle'>{{consumingFrom.remainingDevDays || ''}}</td>
           <td [ngStyle]='tblCellStyle' [style.background-color]='riskColor(consumingFrom)'>{{consumingFrom.risk}}</td>
           <td [ngStyle]='tblCellStyle'>{{consumingFrom.riskComment}}</td>
           <td [ngStyle]='tblCellStyle' [style.background-color]='complianceColor(consumingFrom)'>{{consumingFrom.compliance}}</td>

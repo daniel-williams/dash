@@ -767,6 +767,7 @@ export class VsoService {
                   priority: item.fields[vso.priority],
                   release: item.fields[vso.release],
                   remainingDays: item.fields[vso.remainingDays],
+                  remainingDevDays: item.fields[vso.remainingDevDays],
                   rank: item.fields[vso.rank],
                   risk: item.fields[vso.risk],
                   riskComment: item.fields[vso.riskComment],

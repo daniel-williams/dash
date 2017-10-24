@@ -38,6 +38,7 @@ class VsoStringMap {
   release: string;
   releaseType: string;
   remainingDays: string;
+  remainingDevDays: string;
   resolution: string;
   resolvedDate: string;
   risk: string;
@@ -137,6 +138,7 @@ export const vso = new VsoStringMap([
   { key: 'releaseType', value: 'Microsoft.VSTS.Common.ReleaseType' },
 
   { key: 'remainingDays', value: 'OSG.RemainingDays' },
+  { key: 'remainingDevDays', value: 'OSG.RemainingDevDays' },
   { key: 'resolution', value: 'Microsoft.VSTS.Common.ResolvedReason' },
   { key: 'resolvedDate', value: 'Microsoft.VSTS.Common.ResolvedDate' },
   { key: 'risk', value: 'OSG.RiskAssessment' },

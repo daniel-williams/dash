@@ -75,15 +75,15 @@ export class Scenarios extends PlanningBase {
               .fetchRelated(scenarios.map(item => item.id), [VsoWortItemType.Deliverable, VsoWortItemType.Measure])
               .then(relatedMap => {
                 return scenarios.map(scenario => {
-                  let remainingDays = 0;
+                  let remainingDevDays = 0;
 
                   scenario = Object.assign({}, scenario, relatedMap.parents[scenario.id] || {});
                   scenario.deliverables.forEach(x => {
-                    remainingDays += !!x.remainingDays
-                      ? x.remainingDays
+                    remainingDevDays += !!x.remainingDevDays
+                      ? x.remainingDevDays
                       : 0;
                   });
-                  scenario.remainingDays = remainingDays;
+                  scenario.remainingDevDays = remainingDevDays;
 
                   return scenario;
                 });

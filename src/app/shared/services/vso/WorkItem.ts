@@ -38,6 +38,7 @@ export interface IWorkItem {
   release?: string;
   releaseType?: string;
   remainingDays?: number;
+  remainingDevDays?: number;
   resolution?: string;
   resolvedDate?: Date;
   resolvedDateString?: string;
@@ -94,6 +95,7 @@ export class WorkItem implements IWorkItem {
   release?: string;
   releaseType?: string;
   remainingDays?: number;
+  remainingDevDays?: number;
   resolution?: string;
   resolvedDate?: Date;
   resolvedDateString?: string;

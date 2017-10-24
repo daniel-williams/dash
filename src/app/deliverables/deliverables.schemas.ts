@@ -73,8 +73,8 @@ export const originalEstimateColumnSchema = new ColumnSchema({
   headerClass: 'gray'
 });
 
-export const remainingDaysColumnSchema = new ColumnSchema({
-  key: 'remainingDays',
+export const remainingDevDaysColumnSchema = new ColumnSchema({
+  key: 'remainingDevDays',
   title: 'Remaining Days',
   headerClass: 'gray'
 });
@@ -142,7 +142,7 @@ export const columnSchemas: ColumnSchema[] = [
   iterationColumnSchema,
   availableDateColumnSchema,
   originalEstimateColumnSchema,
-  remainingDaysColumnSchema,
+  remainingDevDaysColumnSchema,
   riskColumnSchema,
   riskCommentColumnSchema,
   complianceColumnSchema,
